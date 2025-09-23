@@ -1,5 +1,5 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
 
 
@@ -21,10 +21,23 @@ import Fundraise from '../Pages/fundraise/Fundraise'
 import Community from '../Pages/community/Community'
 import Selectedfundraise from '../Pages/fundraise/Selectedfundraise'
 import Chat from '../Pages/Chat/Chat'
+import ForgotPassword from '../Pages/forgot_password'
+import ResetPassword from '../Pages/reset_password'
+
+
+const ScrollTotop=()=>{
+    const pathname = useLocation();
+    useEffect(()=>{
+      window.scrollTo(0,0);
+    } ,[pathname])
+    return null ;
+}
+
 
 const RoutePages = () => {
     return (
-        <div>
+        <div className=''>
+            <ScrollTotop/>
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 
@@ -45,6 +58,8 @@ const RoutePages = () => {
                 <Route path='/fundraise' element={<Fundraise/>}/>
                 <Route path='/community' element={<Community/>}/>
                 <Route path='/chatting/:id' element={<Chat/>}/>
+                <Route path='/forgot-password' element={<ForgotPassword/>}/>
+                <Route path='/reset-password' element={<ResetPassword/>}/>
             </Routes>
         </div>
     )

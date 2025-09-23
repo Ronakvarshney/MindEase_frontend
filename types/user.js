@@ -20,6 +20,7 @@ export const registerschema = z
     path: ["confirmPassword"],
   });
 
+  
 export const loginschema = z.object({
   email: z.string().email("Invalid email format"),
   password: z

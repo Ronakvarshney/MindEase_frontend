@@ -11,7 +11,7 @@ const Fundraise = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/fundraise`
         );
-        setEvents(response.data.events); // store events
+        setEvents(response.data.events); 
         console.log(response.data)
       } catch (error) {
         console.error("Error fetching events:", error);
@@ -43,7 +43,7 @@ const Fundraise = () => {
           return (
             <div
               key={event._id}
-              className="bg-slate-800 shadow-lg rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300"
+              className="bg-[#043d43] shadow-lg rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300"
             >
               <Link to={event._id}>
                 <img
@@ -56,7 +56,7 @@ const Fundraise = () => {
                   <h2 className="text-xl font-semibold text-gray-200 mb-2">
                     {event.title}
                   </h2>
-                  <p className="text-gray-600 text-sm mb-3 line-clamp-3">
+                  <p className="text-gray-400 text-sm mb-3 line-clamp-3">
                     {event.description}
                   </p>
 

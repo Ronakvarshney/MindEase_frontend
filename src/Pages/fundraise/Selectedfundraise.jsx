@@ -51,7 +51,7 @@ const Selectedfundraise = () => {
 
   return (
     <div className="min-h-screen bg-[#041e22] p-6 flex justify-between">
-      <div className="max-w-4xl w-full border-2 border-gray-700 shadow-lg rounded-2xl overflow-hidden">
+      <div className="max-w-4xl bg-[#043d43]  w-full border-2 border-gray-700 shadow-lg rounded-2xl overflow-hidden">
         <div className="items-center flex w-full justify-center mt-4">
           <img
             src={event.imageUrl}
@@ -134,7 +134,7 @@ const Selectedfundraise = () => {
         </div>
       </div>
       <div className="text-white flex flex-col md:w-1/2 w-full ml-20 p-4">
-        <div className="bg-slate-700 w-1/2 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 ease-in-out">
+        <div className="bg-[#043d43]  w-1/2 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 ease-in-out">
           {/* Image */}
           <img
             src="/homeless-woman-holding-hands-out-help.jpg"

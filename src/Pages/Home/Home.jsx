@@ -156,7 +156,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className=" w-full flex flex-col sm:flex-row items-center ml-20 gap-6 sm:gap-12 md:gap-20 px-4 mt-6 py-6 sm:py-12">
+        <div className=" w-full  flex flex-col sm:flex-row items-center ml-20 gap-6 sm:gap-12 md:gap-20 px-4 mt-6 py-6 sm:py-12">
           <div className="w-full text-white sm:w-1/2">
             <h2 className="text-xl sm:text-3xl md:text-5xl mb-3 text-yellow-600">
               ᴘʀɪᴏʀɪᴛɪᴢᴇ ʏᴏᴜʀ ᴍᴇɴᴛᴀʟ ʜᴇᴀʟᴛʜ
