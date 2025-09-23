@@ -4,12 +4,10 @@ const BootcampPage = () => {
   const [isEligible, setIsEligible] = useState(false);
   const [document, setDocument] = useState(null);
   const navigate = useNavigate();
-  // Handle file upload for document verification
   const handleFileChange = (e) => {
     setDocument(e.target.files[0]);
   };
 
-  // Check eligibility based on document (mock-up logic)
   const handleEligibilityCheck = () => {
     if (document) {
       // This can be expanded to include actual verification logic

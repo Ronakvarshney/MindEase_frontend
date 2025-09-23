@@ -1,6 +1,5 @@
 import React from "react";
 import Programs from "../Programs/Programs";
-import Footer from "../../Components/Footer";
 import Expert from "../Experts/Expert";
 import { Link, useNavigate } from "react-router-dom";
 

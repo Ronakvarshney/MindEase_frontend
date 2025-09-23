@@ -16,7 +16,6 @@ import SelectDoctor from '../Pages/SelectedDoctors/SelectDoctor'
 import Appointment from '../Pages/Appointment/Appointment'
 import BlogPage from '../Pages/Blogs/Blog'
 import BootcampPage from '../Pages/Bootcamp/Bootcamp'
-import FreeBootcamp from '../Components/freeBootcamp'
 import Fundraise from '../Pages/fundraise/Fundraise'
 import Community from '../Pages/community/Community'
 import Selectedfundraise from '../Pages/fundraise/Selectedfundraise'
@@ -54,7 +53,6 @@ const RoutePages = () => {
                 <Route path='/appointment' element={<Appointment/>}/>
                 <Route path="/blogs" element={<BlogPage/>}/>
                 <Route path="/bootcamp" element={<BootcampPage/>}/>
-                <Route path="/freebootcamp" element={<FreeBootcamp/>}/>
                 <Route path='/fundraise' element={<Fundraise/>}/>
                 <Route path='/community' element={<Community/>}/>
                 <Route path='/chatting/:id' element={<Chat/>}/>
