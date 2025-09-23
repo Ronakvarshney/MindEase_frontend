@@ -36,7 +36,7 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/register",
+        `${import.meta.env.VITE_BACKEND_URL}/api/register`,
         formData
       );
       if (res.data.success) {
