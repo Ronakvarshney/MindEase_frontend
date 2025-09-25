@@ -21,7 +21,7 @@ const Expert = () => {
 
         <div className="flex items-center justify-center">
           <img
-            src="/src/assets/video-call-illustration-download-in-svg-png-gif-file-formats--chat-communication-mobile-app-network-illustrations-3992761.webp"
+            src="/video-call-illustration-download-in-svg-png-gif-file-formats--chat-communication-mobile-app-network-illustrations-3992761.webp"
             className="w-80 hover:scale-110 transition"
           />
         </div>

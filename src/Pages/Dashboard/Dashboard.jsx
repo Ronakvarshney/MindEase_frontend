@@ -52,10 +52,8 @@ const Dashboard = () => {
 
   return (
     <div className="p-8 space-y-8 max-w-screen-lg mx-auto">
-      {/* User Info Section */}
       <div className="flex items-center space-x-6 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
         <div className="w-24 h-24 bg-white rounded-full overflow-hidden">
-          {/* Placeholder for Profile Image */}
           {userData?.profileImage ? (
             <img
               src={userData.profileImage}
@@ -74,7 +72,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Appointments Section */}
       <div className="space-y-6">
         <h3 className="text-3xl font-semibold text-gray-800">Upcoming Appointments</h3>
         <div className=''>
@@ -101,7 +98,6 @@ const Dashboard = () => {
                 </button>
               </div>
 
-              {/* Personal Info Section */}
               {appointment.personalinfo && (
                 <div className="mt-6 space-y-4 text-sm text-gray-600">
                   <h2 className='text-xs font-semibold text-black'>Personal's Information -</h2>

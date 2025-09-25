@@ -9,42 +9,42 @@ const Programs = () => {
       subtitle: "A 24/7 Phone Helpline",
       description:
         "24×7 hotline dedicated to providing confidential and compassionate assistance to individuals in distress.",
-      image: "/src/assets/MINDLINE.png.webp",
+      image: "/MINDLINE.png.webp",
     },
     {
       title: "Compassion Classroom",
       subtitle: "Volunteers and Counselor training",
       description:
         "Training programs tailored to equip volunteers with necessary skills for student counseling and mental health support.",
-      image: "/src/assets/training.jpg.webp",
+      image: "/training.jpg.webp",
     },
     {
       title: "MindChat",
       subtitle: "Chat with Volunteers via MindMantra",
       description:
         "Mental health support via app and web platform, offering empathy, guidance, and resources instantly.",
-      image: "/src/assets/MINDLINE.png.webp",
+      image: "/MINDLINE.png.webp",
     },
     {
       title: "Mind Matters",
       subtitle: "Spreading Awareness",
       description:
         "Mental health camps, sessions to educate, destigmatize, and empower individuals in schools, corporations and communities.",
-      image: "/src/assets/hope-talk.png.webp",
+      image: "/hope-talk.png.webp",
     },
     {
       title: "Brighter Tomorrow",
       subtitle: "Suicide Prevention Program",
       description:
         "Reducing suicide rates through education, support, open dialogue, & access to mental health resources and services.",
-      image: "/src/assets/Suicide.jpg.webp",
+      image: "/Suicide.jpg.webp",
     },
     {
       title: "Prideful Minds",
       subtitle: "LGBTQ Support Program",
       description:
         "Providing resources & advocacy to empower LGBTQ individuals, fostering inclusion, acceptance, & well-being.",
-      image: "/src/assets/Suicide.jpg.webp",
+      image: "/Suicide.jpg.webp",
     },
   ];
 

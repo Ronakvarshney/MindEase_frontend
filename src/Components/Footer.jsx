@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="flex flex-wrap justify-between gap-12 mb-12 text-center md:text-left">
           <div className="flex-1 min-w-[220px]   lg:mr-20 flex flex-col gap-4 items-center md:items-start">
             <img
-              src="/src/assets/brain-logo-icon-human-brain-icon-creative-simple-mind-symbol-vector-illustration_118339-6640.avif"
+              src="/brain-logo-icon-human-brain-icon-creative-simple-mind-symbol-vector-illustration_118339-6640.avif"
               alt="mindease Logo"
               className=" w-16 h-20 rounded-full sm:w-20 sm:h-16 object-contain"
             />

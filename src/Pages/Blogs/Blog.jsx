@@ -6,25 +6,25 @@ const BlogPage = () => {
       title: "Blogs",
       description:
         "Read insightful blogs written by experts and volunteers on mental health, awareness, and personal growth.",
-      image: "/src/assets/blogs.jpg",
+      image: "/blogs.jpg",
     },
     {
       title: "Stories",
       description:
         "Discover real-life stories of resilience and hope that inspire others to overcome mental health struggles.",
-      image: "/src/assets/stories.jpg",
+      image: "/stories.jpg",
     },
     {
       title: "Podcasts",
       description:
         "Listen to engaging podcasts featuring discussions, expert advice, and inspiring conversations.",
-      image: "/src/assets/podcasts.jpg",
+      image: "/podcasts.jpg",
     },
     {
       title: "Articles",
       description:
         "Explore in-depth articles backed by research, providing knowledge and awareness about mental health.",
-      image: "/src/assets/articles.jpg",
+      image: "/articles.jpg",
     },
   ];
 

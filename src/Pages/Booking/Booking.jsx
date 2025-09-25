@@ -6,7 +6,7 @@ const Booking = () => {
   
   const experts = [
     {
-      src: '/src/assets/woman-doctor-wearing-lab-coat-with-stethoscope-isolated.jpg',  // Replace with actual image path
+      src: '/woman-doctor-wearing-lab-coat-with-stethoscope-isolated.jpg',  // Replace with actual image path
       alt: 'Expert 1',
       name: 'Dr. Saraha Williams',
       description: 'Dr. Sarah Williams is a clinical psychologist with over 15 years of experience in treating mental health issues. She specializes in treating depression, anxiety disorders, and PTSD. Dr. Williams uses evidence-based therapies like Cognitive Behavioral Therapy (CBT) and Mindfulness-Based Stress Reduction (MBSR) to help patients lead healthier and happier lives.',
@@ -14,7 +14,7 @@ const Booking = () => {
       degrees: ['PhD in Clinical Psychology', 'Licensed Psychologist'],
     },
     {
-      src: '/src/assets/istockphoto-177373093-612x612.jpg',  // Replace with actual image path
+      src: '/istockphoto-177373093-612x612.jpg',  // Replace with actual image path
       alt: 'Expert 2',
       name: 'Dr. John Smith',
       description: 'Dr. John Smith is a psychiatrist who specializes in treating mood disorders, including depression and bipolar disorder. With extensive experience in both pharmacological and therapeutic approaches, Dr. Smith helps patients manage their mental health conditions through a holistic approach, including therapy, medication management, and lifestyle adjustments.',
@@ -22,7 +22,7 @@ const Booking = () => {
       degrees: ['MD', 'Board Certified in Psychiatry'],
     },
     {
-      src: '/src/assets/photo_2024-12-18_09-48-23-850x600.jpg',  // Replace with actual image path
+      src: '/photo_2024-12-18_09-48-23-850x600.jpg',  // Replace with actual image path
       alt: 'Expert 3',
       name: 'Dr. Emily Davis',
       description: 'Dr. Emily Davis is a psychotherapist and marriage counselor who helps individuals and couples overcome relationship issues, communication problems, and emotional challenges. She uses a blend of psychodynamic therapy, CBT, and couple’s therapy to help people build stronger, healthier relationships.',
@@ -30,7 +30,7 @@ const Booking = () => {
       degrees: ['M.A. in Clinical Psychology', 'Licensed Marriage and Family Therapist (LMFT)'],
     },
     {
-      src: '/src/assets/portrait-hansome-young-male-doctor-man.jpg',  // Replace with actual image path
+      src: '/portrait-hansome-young-male-doctor-man.jpg',  // Replace with actual image path
       alt: 'Expert 4',
       name: 'Dr. Michael Clark',
       description: 'Dr. Michael Clark is a licensed clinical social worker with a focus on trauma and anxiety disorders. He works with patients to address the root causes of their anxiety and offers tools for managing stress and fear. He uses a combination of EMDR (Eye Movement Desensitization and Reprocessing) and CBT to help people heal from past trauma and regain control of their mental health.',
@@ -38,7 +38,7 @@ const Booking = () => {
       degrees: ['LCSW (Licensed Clinical Social Worker)', 'Master of Social Work (MSW)'],
     },
     {
-      src: '/src/assets/healthcare-workers-preventing-virus-quarantine-campaign-concept-cheerful-friendly-asian-female-physician-doctor-with-clipboard-daily-checkup-standing-white-background.jpg',  // Replace with actual image path
+      src: '/healthcare-workers-preventing-virus-quarantine-campaign-concept-cheerful-friendly-asian-female-physician-doctor-with-clipboard-daily-checkup-standing-white-background.jpg',  // Replace with actual image path
       alt: 'Expert 5',
       name: 'Dr. Laura Harris',
       description: 'Dr. Laura Harris is a renowned clinical psychologist specializing in adolescent mental health. She helps teenagers and young adults dealing with anxiety, depression, and self-esteem issues. Dr. Harris provides tailored therapeutic interventions and has a passion for empowering youth to cope with the pressures of school, relationships, and societal expectations.',
@@ -46,7 +46,7 @@ const Booking = () => {
       degrees: ['PhD in Clinical Psychology', 'Licensed Psychologist'],
     },
     {
-      src: '/src/assets/Dr.-Atul-Singhal--1733295298.png',  // Replace with actual image path
+      src: '/Dr.-Atul-Singhal--1733295298.png',  // Replace with actual image path
       alt: 'Expert 6',
       name: 'Dr. Peter Adams',
       description: 'Dr. Peter Adams is a clinical psychiatrist with a focus on holistic mental health. He integrates medication, psychotherapy, and lifestyle changes to help his patients overcome severe mental health conditions like chronic depression, anxiety, and substance abuse disorders. Dr. Adams advocates for the mind-body connection and promotes mental wellness through a comprehensive, individualized treatment approach.',

@@ -135,14 +135,12 @@ const Selectedfundraise = () => {
       </div>
       <div className="text-white flex flex-col md:w-1/2 w-full ml-20 p-4">
         <div className="bg-[#043d43]  w-1/2 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 ease-in-out">
-          {/* Image */}
           <img
             src="/homeless-woman-holding-hands-out-help.jpg"
             alt="Help the Homeless"
             className="w-full object-cover"
           />
 
-          {/* Content */}
           <div className="p-6 text-center">
             <h1 className="text-2xl md:text-2xl font-medium mb-4">
               Help For the Poors Who Suffers from Mental Damage

@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <img
-            src="/src/assets/brain-logo-icon-human-brain-icon-creative-simple-mind-symbol-vector-illustration_118339-6640.avif"
+            src="/brain-logo-icon-human-brain-icon-creative-simple-mind-symbol-vector-illustration_118339-6640.avif"
             width={45}
             className="rounded-full"
           />

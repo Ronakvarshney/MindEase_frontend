@@ -60,7 +60,7 @@ const Chatting = () => {
           </div>
 
           <img
-            src="src/assets/robotai.png"
+            src="/robotai.png"
             alt="AI Robot"
             className="w-24 sm:w-32 lg:w-40 object-contain"
           />
@@ -87,7 +87,7 @@ const Chatting = () => {
               </p>
               <div className="flex justify-center mt-4">
                 <img
-                  src="src/assets/robotai.png"
+                  src="/robotai.png"
                   alt={bot.name}
                   className="w-32 md:w-48 object-contain"
                 />

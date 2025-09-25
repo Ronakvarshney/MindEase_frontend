@@ -51,7 +51,6 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen bg-[#0e5a62] flex items-center justify-center font-manrope px-4">
       <div className="w-full max-w-4xl flex flex-col md:flex-row bg-[#06454d] rounded-xl shadow-lg overflow-hidden">
-        {/* Left image for medium and above */}
         <div className="hidden md:block md:w-1/2">
           <img
             src="/register_image.jpg"
@@ -60,14 +59,12 @@ const LoginPage = () => {
           />
         </div>
 
-        {/* Right form section */}
         <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 text-white flex flex-col justify-center">
           <h2 className="text-2xl sm:text-3xl font-medium text-center text-orange-500 mb-6">
             Login to Your Account
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4 text-black">
-            {/* Email */}
             <div>
               <label
                 htmlFor="email"
@@ -89,7 +86,6 @@ const LoginPage = () => {
               )}
             </div>
 
-            {/* Password */}
             <div>
               <label
                 htmlFor="password"
@@ -111,7 +107,6 @@ const LoginPage = () => {
               )}
             </div>
 
-            {/* Role */}
             <div>
               <label className="block text-sm font-medium text-gray-400">
                 Role
@@ -131,7 +126,6 @@ const LoginPage = () => {
               )}
             </div>
 
-            {/* Submit */}
             <div>
               <button
                 type="submit"
@@ -141,7 +135,6 @@ const LoginPage = () => {
               </button>
             </div>
 
-            {/* Links */}
             <div className="flex flex-col sm:flex-row justify-between items-center text-gray-400 gap-2 text-xs mt-4">
               <Link to="/forgot-password" className="hover:text-indigo-600">
                 Forgot Password?

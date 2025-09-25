@@ -21,16 +21,14 @@ const BootcampPage = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen py-16">
-      {/* Page Title */}
       <header className="text-center mb-12">
         <h1 className="text-5xl font-extrabold text-blue-900">Mental Health Bootcamp</h1>
         <p className="text-lg text-gray-600 mt-2">Free Bootcamps For Poors , Yoga Classes & More for Mental Health Improvement</p>
       </header>
 
-      {/* Bootcamp Eligibility Section */}
       <div className="container mx-auto px-6 bg-white shadow-xl rounded-lg p-8 mb-12">
         <div className='flex items-center justify-center'>
-          <img src='/src/assets/11098.jpg' className='w-1/2 ' />
+          <img src='/11098.jpg' className='w-1/2 ' />
         </div>
         <h2 className="text-3xl font-semibold text-blue-900 mb-6">Join Our Mental Health Bootcamp Free For Poor's</h2>
         <p className="text-gray-700 mb-4">
@@ -56,7 +54,6 @@ const BootcampPage = () => {
         </button>
       </div>
 
-      {/* Eligibility Result Section */}
       {isEligible && (
         <div className="container mx-auto px-6 bg-green-100 shadow-xl rounded-lg p-8 mb-12">
           <h2 className="text-2xl font-semibold text-green-900 mb-4">Congratulations! You're Eligible</h2>
@@ -73,7 +70,6 @@ const BootcampPage = () => {
         </div>
       )}
 
-      {/* Payment Option for Ineligible Users */}
       {!isEligible && document && (
         <div className="container mx-auto px-6 bg-yellow-100 shadow-xl rounded-lg p-8 mb-12">
           <h2 className="text-2xl font-semibold text-yellow-900 mb-4">Not Eligible for Free Bootcamp</h2>
@@ -93,7 +89,7 @@ const BootcampPage = () => {
       {/* Programs Section - Card Layout */}
       <section className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div className="bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-          <img src="/src/assets/Screenshot_2025-02-05_at_2.17.05_PM.webp" alt="Bootcamp Program" className="w-57  h-48 object-cover" />
+          <img src="/Screenshot_2025-02-05_at_2.17.05_PM.webp" alt="Bootcamp Program" className="w-57  h-48 object-cover" />
           <div className="p-6">
             <h3 className="text-2xl font-semibold text-blue-900">Mental Health Bootcamp</h3>
             <p className="text-gray-600 mt-2">
@@ -106,7 +102,7 @@ const BootcampPage = () => {
         </div>
 
         <div className="bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-          <img src="/src/assets/6172edae4f281c001296a1e7.webp" alt="Yoga Classes" className="w-full h-48 object-cover" />
+          <img src="/6172edae4f281c001296a1e7.webp" alt="Yoga Classes" className="w-full h-48 object-cover" />
           <div className="p-6">
             <h3 className="text-2xl font-semibold text-blue-900">Free Yoga Classes</h3>
             <p className="text-gray-600 mt-2">
@@ -119,7 +115,7 @@ const BootcampPage = () => {
         </div>
 
         <div className="bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-          <img src="/src/assets/people-in-addiction-treatment-program.jpg" alt="Therapy Programs" className="w-full h-48 object-cover" />
+          <img src="/people-in-addiction-treatment-program.jpg" alt="Therapy Programs" className="w-full h-48 object-cover" />
           <div className="p-6">
             <h3 className="text-2xl font-semibold text-blue-900">Therapy Programs</h3>
             <p className="text-gray-600 mt-2">
@@ -156,7 +152,6 @@ const BootcampPage = () => {
         </div>
       </section>
 
-      {/* General Info Section */}
       <div className="container mx-auto px-6 bg-white shadow-xl rounded-lg p-8 mt-12">
         <h2 className="text-2xl font-semibold text-blue-900 mb-6">Program Details</h2>
         <p className="text-gray-700 mb-4">

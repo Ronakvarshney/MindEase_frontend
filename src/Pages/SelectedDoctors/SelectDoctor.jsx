@@ -10,7 +10,6 @@ const SelectDoctor = () => {
     return (
         <div className="flex flex-col justify-center items-center bg-gray-100 py-12">
             <div className="max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
-                {/* Doctor Image and Details */}
                 <div className="flex flex-col items-center p-8">
                     <img
                         src={expert.src}
