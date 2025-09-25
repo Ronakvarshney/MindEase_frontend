@@ -43,7 +43,7 @@ const Home = () => {
 
           <div className="w-full md:w-1/2 flex justify-center mt-8 md:mt-0">
             <img
-              src="public/flat-illustration-world-health-day-celebration.png"
+              src="/flat-illustration-world-health-day-celebration.png"
               alt="Mental Health"
               className="w-3/4 md:w-2/3 rounded-xl"
             />
@@ -64,7 +64,7 @@ const Home = () => {
         <div className="flex flex-col sm:flex-row items-center bg-[#03252a] py-10 gap-6 sm:gap-12 md:gap-8 mx-auto px-4">
           <div className="w-full sm:w-1/2 flex justify-center">
             <img
-              src="public/hand-drawn-adhd-illustration.png"
+              src="/hand-drawn-adhd-illustration.png"
               className="w-1/2"
             />
           </div>
@@ -106,7 +106,7 @@ const Home = () => {
               <Link to="/fundraise">
                 <div className=" flex flex-col items-center text-center">
                   <img
-                    src="public/people-stacking-hands-together-park.jpg"
+                    src="/people-stacking-hands-together-park.jpg"
                     alt="Volunteer"
                     className="w-full rounded-t-md mb-4"
                   />
@@ -140,7 +140,7 @@ const Home = () => {
               <Link to="/community">
                 <div className=" flex flex-col items-center text-center">
                   <img
-                    src="public/people-stacking-hands-together-park.jpg"
+                    src="/people-stacking-hands-together-park.jpg"
                     alt="Volunteer"
                     className="w-full rounded-t-md mb-4"
                   />
@@ -183,7 +183,7 @@ const Home = () => {
           </div>
           <div className="w-full sm:w-1/2 flex justify-center">
             <img
-              src="public/freepik__background__7098.png"
+              src="/freepik__background__7098.png"
               className="w-1/2"
               alt="AI Quiz"
             />

@@ -49,37 +49,39 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0e5a62]  flex items-center justify-center font-manrope">
-      <div className="max-w-4xl mx-auto flex  ">
-        <div className="w-10/12 hidden md:block">
+    <div className="min-h-screen bg-[#0e5a62] flex items-center justify-center font-manrope px-4">
+      <div className="w-full max-w-4xl flex flex-col md:flex-row bg-[#06454d] rounded-xl shadow-lg overflow-hidden">
+        {/* Left image for medium and above */}
+        <div className="hidden md:block md:w-1/2">
           <img
             src="/register_image.jpg"
             alt="Login visual"
-            className="h-full object-cover rounded-l-lg"
+            className="h-full w-full object-cover"
           />
         </div>
 
-        <div className=" bg-[#06454d] text-white py-5 md:p-10 rounded-tr-xl rounded-br-xl shadow-lg w-full  ">
-          <h2 className="text-2xl font-medium text-center text-orange-500 mb-6">
+        {/* Right form section */}
+        <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 text-white flex flex-col justify-center">
+          <h2 className="text-2xl sm:text-3xl font-medium text-center text-orange-500 mb-6">
             Login to Your Account
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4 text-black">
+            {/* Email */}
             <div>
               <label
                 htmlFor="email"
-                className="block text-gray-400 text-sm font-medium "
+                className="block text-gray-400 text-sm font-medium"
               >
                 Email
               </label>
               <input
                 type="email"
                 id="email"
-                name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full mt-2 p-2 border border-gray-300  rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 required
               />
               {errors.email && (
@@ -87,34 +89,35 @@ const LoginPage = () => {
               )}
             </div>
 
+            {/* Password */}
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm text-gray-400  font-medium "
+                className="block text-sm text-gray-400 font-medium"
               >
                 Password
               </label>
               <input
                 type="password"
                 id="password"
-                name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="w-full mt-2 p-2 border border-gray-300  rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 required
               />
               {errors.password && (
                 <p className="text-red-500 text-sm">{errors.password}</p>
               )}
             </div>
+
+            {/* Role */}
             <div>
-              <label className="block text-sm font-medium  text-gray-400">
+              <label className="block text-sm font-medium text-gray-400">
                 Role
               </label>
               <select
-                className="w-full mt-2 p-2 border border-gray-300   rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                name="role"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
                 required
@@ -128,17 +131,19 @@ const LoginPage = () => {
               )}
             </div>
 
+            {/* Submit */}
             <div>
               <button
                 type="submit"
-                className="w-full bg-[#A10716] text-white py-3 rounded-md  focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full bg-[#A10716] text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 Login
               </button>
             </div>
 
-            <div className="flex justify-center text-gray-400 gap-3 text-xs ">
-              <Link to="/forgot-password" className="hover:text-indigo-600 ">
+            {/* Links */}
+            <div className="flex flex-col sm:flex-row justify-between items-center text-gray-400 gap-2 text-xs mt-4">
+              <Link to="/forgot-password" className="hover:text-indigo-600">
                 Forgot Password?
               </Link>
               <span className="text-orange-500">
@@ -154,7 +159,6 @@ const LoginPage = () => {
           </form>
         </div>
       </div>
-
       <ToastContainer />
     </div>
   );

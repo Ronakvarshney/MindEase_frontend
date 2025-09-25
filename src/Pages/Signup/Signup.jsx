@@ -49,20 +49,24 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-[#0e5a62] px-4 font-manrope">
-      <div className="max-w-4xl flex ">
-        <div className="w-1/2 hidden md:block">
+      <div className="w-full max-w-4xl flex flex-col md:flex-row bg-[#06454d] rounded-xl shadow-lg overflow-hidden">
+        {/* Left image */}
+        <div className="hidden md:block md:w-1/2">
           <img
             src="/register_image.jpg"
-            alt="Login visual"
-            className="h-full object-cover rounded-l-lg"
-          />{" "}
+            alt="Register visual"
+            className="h-full w-full object-cover"
+          />
         </div>
-        <div className="bg-[#06454d] text-orange-600 p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-sm">
-          <h2 className="text-2xl sm:text-2xl font-semibold text-center mb-6">
+
+        {/* Right form */}
+        <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 text-orange-600 flex flex-col justify-center">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6">
             Register
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4 text-black">
+            {/* Name */}
             <div>
               <label
                 htmlFor="name"
@@ -77,7 +81,7 @@ const Register = () => {
                 placeholder="Enter name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full p-2 border  border-gray-400 rounded-lg mt-1 text-sm sm:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full p-2 border border-gray-400 rounded-lg mt-1 text-sm sm:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               />
               {errors.name && (
@@ -85,6 +89,7 @@ const Register = () => {
               )}
             </div>
 
+            {/* Email */}
             <div>
               <label
                 htmlFor="email"
@@ -107,6 +112,7 @@ const Register = () => {
               )}
             </div>
 
+            {/* Password */}
             <div>
               <label
                 htmlFor="password"
@@ -129,10 +135,11 @@ const Register = () => {
               )}
             </div>
 
+            {/* Confirm Password */}
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-300"
+                className="block text-sm text-gray-300 font-medium"
               >
                 Confirm Password
               </label>
@@ -140,10 +147,10 @@ const Register = () => {
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
-                placeholder="Enter confirm-password here"
+                placeholder="Enter confirm password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full p-2 border  border-gray-400 rounded-lg mt-1 text-sm sm:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full p-2 border border-gray-400 rounded-lg mt-1 text-sm sm:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               />
               {errors.confirmPassword && (
@@ -151,6 +158,7 @@ const Register = () => {
               )}
             </div>
 
+            {/* Submit button */}
             <button
               type="submit"
               className="w-full p-2 sm:p-3 bg-[#A10716] text-white rounded-lg mt-4 text-sm sm:text-base font-medium focus:outline-none focus:ring-2 hover:bg-[#830915] focus:ring-opacity-50"
@@ -159,7 +167,8 @@ const Register = () => {
             </button>
           </form>
 
-          <div className="text-xs flex items-center mt-4 justify-center text-gray-300">
+          {/* Link */}
+          <div className="text-xs sm:text-sm flex items-center mt-4 justify-center text-gray-300">
             <p>
               Already have an account?{" "}
               <Link to="/login" className="text-blue-400 font-medium">

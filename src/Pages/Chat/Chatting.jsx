@@ -3,24 +3,27 @@ import { Link } from "react-router-dom";
 const Chatting = () => {
   const bots = [
     {
-      id: "1",
+      id: "1777689698698",
       name: "Captain Jarvis",
+      tag: "Trained Model",
       role: "Mental Health Support",
       description:
         "Your tough, no-nonsense AI mentor who resolve your queries related to mental health ",
       tags: ["AI mentor", "Take action", "Tough", "Get results"],
     },
     {
-      id: "2",
+      id: "2880979079079",
       name: "Friend Jarvis",
+      tag : "Paid",
       role: "Companionship & Emotional Support",
       description:
         "Your caring AI friend, always there to chat, share a giggle, lend an ear, and offer support.",
       tags: ["AI friend", "Uplifting", "Offer support"],
     },
     {
-      id: "3",
+      id: "3698687807099",
       name: "Coach Jarvis",
+      tag: "Ask Anything",
       role: "Self-Reflection & Mindfulness",
       description:
         "Your go-to AI for fitness and wellness tips, motivating you to hit your goals and stay healthy. ask anything",
@@ -30,9 +33,7 @@ const Chatting = () => {
 
   return (
     <div className="min-h-screen bg-[#041e22] flex flex-col items-center p-4">
-      {/* 🔹 Top Section */}
       <div className="max-w-6xl w-full mx-auto flex flex-col lg:flex-row text-white justify-between p-5 bg-[#0b515c] rounded-xl gap-6">
-        {/* Left Text Content */}
         <div className="flex flex-col gap-3 lg:max-w-3xl">
           <h1 className="text-2xl md:text-3xl font-semibold leading-snug">
             Your True AI Friend to Talk To...
@@ -46,7 +47,6 @@ const Chatting = () => {
           </p>
         </div>
 
-        {/* Right Chat Box */}
         <div className="bg-slate-800 text-white flex flex-col sm:flex-row items-center gap-4 font-medium p-4 rounded-lg w-full lg:max-w-md">
           <div className="flex flex-col flex-1 text-center sm:text-left">
             <h1 className="text-base md:text-lg font-medium">
@@ -67,7 +67,6 @@ const Chatting = () => {
         </div>
       </div>
 
-      {/* 🔹 Bots Grid Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 w-full max-w-6xl">
         {bots.map((bot) => (
           <div
@@ -75,9 +74,13 @@ const Chatting = () => {
             className="bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition flex flex-col justify-between"
           >
             <Link to={`/chatting/${bot.id}`} className="block">
-              <h2 className="text-lg md:text-xl font-bold text-gray-200">
-                {bot.name}
-              </h2>
+              <div className="flex justify-between">
+                <h2 className="text-lg md:text-xl font-bold text-gray-200">
+                  {bot.name}
+                </h2>
+                <p className="bg-[#930d9f] text-xs rounded-2xl text-white p-2 font-manrope">{bot.tag}</p>
+              </div>
+
               <p className="text-sm text-gray-300">{bot.role}</p>
               <p className="mt-2 text-gray-400 text-sm md:text-base">
                 {bot.description}

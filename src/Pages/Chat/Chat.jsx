@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import useAuthStore from "../../../store/authStore";
+import { useParams } from "react-router-dom";
 
 const Chat = () => {
-  const { username } = useAuthStore();
-  console.log(username)
+  const { id } = useParams();
+  console.log(id);
+  const { email } = useAuthStore();
   const [usermsg, Setusermsg] = useState("");
   const [istyping, setistyping] = useState(false);
   const [messages, Setmessages] = useState([
@@ -22,7 +24,9 @@ const Chat = () => {
     try {
       setistyping(true);
       const response = await axios.post(
-        "http://localhost:3000/api/generate-chat",
+        id == "3698687807099"
+          ? "http://localhost:3000/api/generate-chat3"
+          : "http://localhost:3000/api/generate-chat",
         { message: usermsg },
         { withCredentials: true }
       );
@@ -41,9 +45,11 @@ const Chat = () => {
   };
   return (
     <div className="w-full min-h-screen bg-[#041e22] py-10">
-      {username == undefined ? (
+      {email == undefined ? (
         <div className="flex items-center justify-center">
-           <h1 className="text-white text-4xl">Login First, You are not authorized to see this page</h1>
+          <h1 className="text-white text-4xl">
+            Login First, You are not authorized to see this page
+          </h1>
         </div>
       ) : (
         <main className="w-full max-w-4xl bg-[#083a42]  mx-auto rounded-2xl shadow-lg flex flex-col overflow-hidden h-[80vh]">
