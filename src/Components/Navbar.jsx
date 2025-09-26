@@ -17,7 +17,6 @@ const Navbar = () => {
       const res = await axios.post("http://localhost:3000/api/logout", null, {
         withCredentials: true,
       });
-      console.log(res.data);
       if (res.data.success) {
         navigate("/login");
       }

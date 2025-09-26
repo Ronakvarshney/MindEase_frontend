@@ -61,34 +61,39 @@ const Home = () => {
         </div>
 
         <Programs />
-        <div className="flex flex-col sm:flex-row items-center bg-[#03252a] py-10 gap-6 sm:gap-12 md:gap-8 mx-auto px-4">
-          <div className="w-full sm:w-1/2 flex justify-center">
+        <div className="flex flex-col md:flex-row items-center bg-[#03252a] py-10 gap-6 md:gap-12 px-4 md:px-12">
+          <div className="w-full md:w-1/2 flex justify-center">
             <img
               src="/hand-drawn-adhd-illustration.png"
-              className="w-1/2"
+              alt="Chat with AI"
+              className="w-3/4 sm:w-2/3 md:w-full max-w-sm"
             />
           </div>
-          <div className="w-full sm:w-1/2 mr-20 text-white">
-            <h2 className="text-xl sm:text-2xl md:text-5xl  font-medium  text-yellow-600">
+
+          <div className="w-full md:w-1/2 text-center md:text-left space-y-4 text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-yellow-600">
               ᴄʜᴀᴛ ᴡɪᴛʜ ᴀɪ ᴛᴏ ɢᴇᴛ ʀɪᴅ ꜰʀᴏᴍ ᴍᴇɴᴛᴀʟ ʜᴇᴀʟᴛʜ ɪꜱꜱᴜᴇꜱ
             </h2>
-            <p className="mt-4 text-sm sm:text-base md:text-lg leading-relaxed text-green-500">
+
+            <p className="text-sm sm:text-base md:text-base leading-relaxed text-green-500">
               🇴​​🇵​​🇪​​🇳​​🇮​​🇳​​🇬​ ​🇺​​🇵​ ​🇦​​🇧​​🇴​​🇺​​🇹​
               ​🇾​​🇴​​🇺​​🇷​ ​🇲​​🇪​​🇳​​🇹​​🇦​​🇱​ ​🇭​​🇪​​🇦​​
               ​🇱​​🇹​​🇭​ ​🇮​​🇸​ ​🇹​​🇭​​🇪​ ​🇫​​🇮​​🇷​​🇸​​🇹​
               ​🇸​​🇹​​🇪​​🇵
             </p>
-            <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed">
+
+            <p className="text-xs sm:text-sm md:text-base leading-relaxed text-gray-300">
               AI can play a significant role in addressing mental health issues
               by providing accessible, personalized, and effective support.
               Chatbots and virtual therapists, available 24/7, offer immediate,
               non-judgmental assistance, allowing individuals to express their
               feelings and receive guidance at any time.
             </p>
-            <div className="flex items-center mt-3">
+
+            <div className="flex justify-center md:justify-start mt-3">
               <button
                 onClick={() => navigate("/chatting")}
-                className="bg-blue-500 px-4 py-2 rounded-lg text-white text-sm sm:text-base"
+                className="bg-blue-500 px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-white text-sm sm:text-base hover:scale-105 transition-transform duration-300"
               >
                 Get Started
               </button>
@@ -155,37 +160,36 @@ const Home = () => {
           </div>
         </div>
 
-        <div className=" w-full  flex flex-col sm:flex-row items-center ml-20 gap-6 sm:gap-12 md:gap-20 px-4 mt-6 py-6 sm:py-12">
-          <div className="w-full text-white sm:w-1/2">
-            <h2 className="text-xl sm:text-3xl md:text-5xl mb-3 text-yellow-600">
+        <div className="w-full flex flex-col md:flex-row items-center gap-6 md:gap-12 px-4 md:px-12 py-6">
+          <div className="w-full md:w-1/2 text-center md:text-left space-y-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-600">
               ᴘʀɪᴏʀɪᴛɪᴢᴇ ʏᴏᴜʀ ᴍᴇɴᴛᴀʟ ʜᴇᴀʟᴛʜ
             </h2>
-            <p className="text-sm sm:text-base md:text-xl text-green-500">
+            <p className="text-sm sm:text-base md:text-lg text-green-500">
               𝒯𝒶𝓀𝑒 𝓉𝒽𝑒 𝒻𝒾𝓇𝓈𝓉 𝓈𝓉𝑒𝓅.{" "}
               <span className="text-orange-700">
-                𝒞heck Your Mental Health Condition With Ai Powered Quiz
+                𝒞heck Your Mental Health Condition With AI Powered Quiz
               </span>
             </p>
-            <p className="mt-2 text-xs sm:text-sm md:text-base leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed">
               AI-powered quizzes provide a quick, accessible, and non-invasive
               way to assess emotional and psychological state. These quizzes use
               AI to analyze responses and detect patterns related to mental
               health concerns like anxiety, depression, or stress.
             </p>
-            <div className="mt-4">
-              <button
-                className="bg-red-500 px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold text-white text-sm sm:text-base"
-                onClick={generateQuiz}
-              >
-                Analysis Mental Health with AI Powered Quiz
-              </button>
-            </div>
+            <button
+              onClick={generateQuiz}
+              className="mt-4 bg-red-500 px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold text-white hover:scale-105 transition-transform duration-300"
+            >
+              Analyze Mental Health with AI Powered Quiz
+            </button>
           </div>
-          <div className="w-full sm:w-1/2 flex justify-center">
+
+          <div className="w-full md:w-1/2 flex justify-center mt-6 md:mt-0">
             <img
               src="/freepik__background__7098.png"
-              className="w-1/2"
               alt="AI Quiz"
+              className="w-3/4 sm:w-2/3 md:w-full max-w-sm"
             />
           </div>
         </div>
