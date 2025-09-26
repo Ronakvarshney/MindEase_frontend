@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog.tsx";
+} from "@/components/ui/dialog";
 
 const Selectedfundraise = () => {
   const { id } = useParams();
