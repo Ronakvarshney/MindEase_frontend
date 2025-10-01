@@ -45,11 +45,10 @@ const Selectedfundraise = () => {
         { event, email },
         {withCredentials : true}
       );
-      console.log(response.data)
       toast.success(response?.data?.message || "Participation successful!");
     } catch (error) {
       console.error(error);
-      toast.error("Error while registering participation.");
+      toast.error("Error while registering participation,First login");
     }
   };
 
@@ -79,7 +78,6 @@ const Selectedfundraise = () => {
   return (
     <div className="min-h-screen bg-[#041e22] p-4 md:p-8 font-manrope">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
-        {/* Event Details Card */}
         <div className="flex-1 bg-[#043d43] border border-gray-700 rounded-2xl shadow-lg overflow-hidden">
           <img
             src={event.imageUrl}
@@ -126,7 +124,6 @@ const Selectedfundraise = () => {
               </div>
             </div>
 
-            {/* Fundraising Progress */}
             <div className="mt-6">
               <h2 className="text-lg font-semibold text-gray-200 mb-2">
                 Fundraising Progress
@@ -155,7 +152,6 @@ const Selectedfundraise = () => {
               <p className="text-gray-300">📞 {event.contactPhone}</p>
             </div>
 
-            {/* Participate Button */}
             <Dialog>
               <DialogTrigger className="w-full sm:w-auto mt-6 bg-green-600 hover:bg-green-700 text-white py-3 px-6 font-medium rounded-xl shadow-md transition">
                 Participate and Raise Funds
@@ -202,7 +198,6 @@ const Selectedfundraise = () => {
           </div>
         </div>
 
-        {/* Donation Card */}
         <div className="flex-1 flex flex-col gap-6">
           <div className="bg-[#043d43] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 ease-in-out">
             <img

@@ -7,7 +7,6 @@ import Register from '../Pages/Signup/Signup'
 import LoginPage from '../Pages/Login/Login'
 import Dashboard from '../Pages/Dashboard/Dashboard'
 import HomePage from '../Pages/Home/Home'
-import Questions from '../Pages/generateQuestion/Questions'
 import Booking from '../Pages/Booking/Booking'
 import Chatting from '../Pages/Chat/Chatting'
 import SelectedProgram from '../Pages/SelectedPrograms/SelectedProgram'
@@ -22,6 +21,7 @@ import Selectedfundraise from '../Pages/fundraise/Selectedfundraise'
 import Chat from '../Pages/Chat/Chat'
 import ForgotPassword from '../Pages/forgot_password'
 import ResetPassword from '../Pages/reset_password'
+import { Questions } from '@/Pages/generateQuestion/Questions'
 
 
 const ScrollTotop=()=>{

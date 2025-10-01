@@ -2,12 +2,55 @@ import React from "react";
 import Programs from "../Programs/Programs";
 import Expert from "../Experts/Expert";
 import { Link, useNavigate } from "react-router-dom";
+import { Marquee } from "../../Components/ui/marquee";
+import { cn } from "@/lib/utils";
 
 const Home = () => {
   const navigate = useNavigate();
   const generateQuiz = () => {
     navigate("/generateQuestion");
   };
+
+  const reviews = [
+    {
+      name: "Jack",
+      username: "@jack",
+      body: "I've never seen anything like this before. It's amazing. I love it.",
+      img: "https://avatar.vercel.sh/jack",
+    },
+    {
+      name: "Jill",
+      username: "@jill",
+      body: "I don't know what to say. I'm speechless. This is amazing.",
+      img: "https://avatar.vercel.sh/jill",
+    },
+    {
+      name: "John",
+      username: "@john",
+      body: "I'm at a loss for words. This is amazing. I love it.",
+      img: "https://avatar.vercel.sh/john",
+    },
+    {
+      name: "Jane",
+      username: "@jane",
+      body: "I'm at a loss for words. This is amazing. I love it.",
+      img: "https://avatar.vercel.sh/jane",
+    },
+    {
+      name: "Jenny",
+      username: "@jenny",
+      body: "I'm at a loss for words. This is amazing. I love it.",
+      img: "https://avatar.vercel.sh/jenny",
+    },
+    {
+      name: "James",
+      username: "@james",
+      body: "I'm at a loss for words. This is amazing. I love it.",
+      img: "https://avatar.vercel.sh/james",
+    },
+  ];
+  const firstRow = reviews.slice(0, reviews.length / 2);
+  const secondRow = reviews.slice(reviews.length / 2);
 
   return (
     <div>
@@ -196,12 +239,83 @@ const Home = () => {
 
         <Expert />
 
-        <div className="m-8 px-4">
-          <p className="w-full bg-gray-100 p-4 rounded-lg text-sm sm:text-lg md:text-2xl font-semibold">
-            Mental health issues can affect anyone, regardless of age,
-            background, or life circumstances...
+        <div className="w-full bg-gray-100 flex items-center justify-center px-4">
+          <p className=" mx-auto  p-4 rounded-lg text-sm sm:text-lg md:text-2xl font-semibold">
+            Review from Our Users
           </p>
         </div>
+        <div className="relative w-full overflow-hidden py-4 bg-gray-900">
+          <div className="flex animate-marquee whitespace-nowrap gap-6">
+            {reviews.map((review, idx) => (
+              <div
+                key={idx}
+                className="flex-none w-96 p-4 bg-gray-800 text-white rounded-xl border border-gray-700"
+              >
+                <div className="flex items-center gap-2">
+                  <img src={review.img} className="w-10 h-10 rounded-full" />
+                  <div>
+                    <figcaption className="font-medium">
+                      {review.name}
+                    </figcaption>
+                    <p className="text-sm text-gray-300">{review.username}</p>
+                  </div>
+                </div>
+                <blockquote className="mt-2 text-xs md:text-sm">
+                  {review.body}
+                </blockquote>
+              </div>
+            ))}
+            {reviews.map((review, idx) => (
+              <div
+                key={`dup-${idx}`}
+                className="flex-none w-64 p-4 bg-gray-800 text-white rounded-xl border border-gray-700"
+              >
+                <div className="flex items-center gap-2">
+                  <img src={review.img} className="w-10 h-10 rounded-full" />
+                  <div>
+                    <figcaption className="font-medium">
+                      {review.name}
+                    </figcaption>
+                    <p className="text-sm text-gray-300">{review.username}</p>
+                  </div>
+                </div>
+                <blockquote className="mt-2 text-sm">{review.body}</blockquote>
+              </div>
+            ))}
+          </div>
+
+          <style jsx>{`
+            .animate-marquee {
+              animation: marquee 20s linear infinite;
+            }
+            @keyframes marquee {
+              0% {
+                transform: translateX(0);
+              }
+              100% {
+                transform: translateX(-50%);
+              }
+            }
+          `}</style>
+        </div>
+
+        {/* <Marquee reverse pauseOnHover className="[--duration:20s] mt-2">
+          {secondRow.map((review, indx) => (
+            <span
+              key={indx}
+              className="inline-block px-4 py-2 rounded-lg bg-gray-800 text-white mx-2"
+            >
+              <div className="flex items-center gap-2">
+                <img src={review.img} className="rounded-full w-10 h-10" />
+                <div>
+                  <figcaption>{review.name}</figcaption>
+                  <p>{review.username}</p>
+                </div>
+              </div>
+              <blockquote className="mt-2 text-sm">{review.body}</blockquote>
+            </span>
+          ))}
+        </Marquee> */}
       </div>
     </div>
   );

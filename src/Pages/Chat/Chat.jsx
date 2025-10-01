@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 const Chat = () => {
   const { id } = useParams();
   const { email } = useAuthStore();
-  console.log(email)
   const [usermsg, Setusermsg] = useState("");
   const [istyping, setistyping] = useState(false);
   const [messages, Setmessages] = useState([
@@ -31,6 +30,7 @@ const Chat = () => {
         { withCredentials: true }
       );
       if (response?.data?.success) {
+        console.log(response.data)
         setistyping(false);
         Setmessages((prev) => [
           ...prev,
@@ -38,7 +38,6 @@ const Chat = () => {
         ]);
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
     }
   };

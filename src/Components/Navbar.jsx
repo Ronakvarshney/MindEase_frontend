@@ -4,10 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaUser } from "react-icons/fa";
 import { HiMenu, HiX } from "react-icons/hi"; // hamburger & close icons
+import useAuthStore from "../../store/authStore.js";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const tokendata = localStorage.getItem("token");
+  const{email} = useAuthStore();
   const [toggle, setToggle] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -59,7 +60,7 @@ const Navbar = () => {
             </Link>
           </li>
 
-          {tokendata ? (
+          {email ? (
             <div className="relative flex items-center gap-3">
               <FaUser
                 className="text-xl cursor-pointer"
