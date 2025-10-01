@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 const Chat = () => {
   const { id } = useParams();
   const { email } = useAuthStore();
+  console.log(email)
   const [usermsg, Setusermsg] = useState("");
   const [istyping, setistyping] = useState(false);
   const [messages, Setmessages] = useState([
@@ -43,7 +44,7 @@ const Chat = () => {
   };
   return (
     <div className="w-full min-h-screen bg-[#041e22] py-10">
-      {email ? (
+      {email == null ? (
         <div className="flex items-center justify-center">
           <h1 className="text-white text-4xl">
             Login First, You are not authorized to see this page

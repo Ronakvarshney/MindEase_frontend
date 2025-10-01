@@ -9,24 +9,25 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/Components/ui/dialog.tsx";
+import useAuthStore from "../../../store/authStore";
+import { toast, ToastContainer } from "react-toastify";
 
 const Selectedfundraise = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { email } = useAuthStore();
 
   useEffect(() => {
     const getEvent = async () => {
       try {
-        if (id) {
-          const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_URL}/api/fundraiseEvent`,
-            { id }
-          );
-          setEvent(response.data.event);
-        } else {
-          console.log("Event ID not found");
-        }
+        if (!id) return console.log("Event ID not found");
+
+        const response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/fundraiseEvent`,
+          { id }
+        );
+        setEvent(response.data.event);
       } catch (error) {
         console.error(error);
       } finally {
@@ -35,6 +36,22 @@ const Selectedfundraise = () => {
     };
     getEvent();
   }, [id]);
+
+  const handleParticipate = async () => {
+    if (!email || !event) return;
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/eventparticipate`,
+        { event, email },
+        {withCredentials : true}
+      );
+      console.log(response.data)
+      toast.success(response?.data?.message || "Participation successful!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Error while registering participation.");
+    }
+  };
 
   if (loading) {
     return (
@@ -54,10 +71,15 @@ const Selectedfundraise = () => {
     );
   }
 
+  const progress =
+    event.goalAmount > 0
+      ? Math.min((event.raisedAmount / event.goalAmount) * 100, 100)
+      : 0;
+
   return (
-    <div className="min-h-screen bg-[#041e22] p-4 md:p-8">
+    <div className="min-h-screen bg-[#041e22] p-4 md:p-8 font-manrope">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
-        {/* Event Details */}
+        {/* Event Details Card */}
         <div className="flex-1 bg-[#043d43] border border-gray-700 rounded-2xl shadow-lg overflow-hidden">
           <img
             src={event.imageUrl}
@@ -68,7 +90,9 @@ const Selectedfundraise = () => {
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-100">
               {event.title}
             </h1>
-            <p className="text-gray-300 text-sm sm:text-base">{event.description}</p>
+            <p className="text-gray-300 text-sm sm:text-base">
+              {event.description}
+            </p>
 
             <div className="grid sm:grid-cols-2 gap-4 mt-4 text-sm sm:text-base">
               <div>
@@ -78,7 +102,8 @@ const Selectedfundraise = () => {
               <div>
                 <h2 className="font-semibold text-gray-200">Location</h2>
                 <p className="text-gray-300">
-                  {event.location.venue}, {event.location.city}, {event.location.country}
+                  {event.location.venue}, {event.location.city},{" "}
+                  {event.location.country}
                 </p>
               </div>
             </div>
@@ -109,8 +134,8 @@ const Selectedfundraise = () => {
               <div className="w-full bg-gray-700 rounded-full h-4">
                 <div
                   className="bg-green-500 h-4 rounded-full transition-all duration-500"
-                  style={{ width: `${(event.raisedAmount / event.goalAmount) * 100}%` }}
-                ></div>
+                  style={{ width: `${progress}%` }}
+                />
               </div>
               <p className="mt-2 text-gray-300 text-sm sm:text-base">
                 Raised:{" "}
@@ -124,7 +149,6 @@ const Selectedfundraise = () => {
               </p>
             </div>
 
-            {/* Contact */}
             <div className="mt-6 text-sm sm:text-base">
               <h2 className="font-semibold text-gray-200">Contact</h2>
               <p className="text-gray-300">📧 {event.contactEmail}</p>
@@ -133,18 +157,45 @@ const Selectedfundraise = () => {
 
             {/* Participate Button */}
             <Dialog>
-              <DialogTrigger>
-                <button className="w-full sm:w-auto mt-6 bg-green-600 hover:bg-green-700 text-white py-3 px-6 font-medium rounded-xl shadow-md transition">
-                  Participate and Raise Funds
-                </button>
+              <DialogTrigger className="w-full sm:w-auto mt-6 bg-green-600 hover:bg-green-700 text-white py-3 px-6 font-medium rounded-xl shadow-md transition">
+                Participate and Raise Funds
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Confirm Participation</DialogTitle>
-                  <DialogDescription>
-                    Are you sure you want to participate in this event? Your
-                    contribution will support this cause.
-                  </DialogDescription>
+                  {email ? (
+                    <div>
+                      <DialogTitle className="py-3 text-2xl font-manrope">
+                        Confirm Participation
+                      </DialogTitle>
+                      <DialogDescription className="flex flex-col mt-2 gap-2">
+                        Are you sure you want to participate in this event? Your
+                        contribution will support this cause.
+                        <label className="text-gray-300">
+                          Your Email Address
+                        </label>
+                        <input
+                          type="email"
+                          value={email}
+                          readOnly
+                          className="p-2 rounded-md border border-gray-600 bg-gray-800 text-gray-200"
+                        />
+                        <button
+                          onClick={handleParticipate}
+                          className="mt-4 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg"
+                        >
+                          Participate
+                        </button>
+                      </DialogDescription>
+                    </div>
+                  ) : (
+                    <div className="text-center text-gray-300">
+                      Please{" "}
+                      <a href="/login" className="text-green-400 underline">
+                        login
+                      </a>{" "}
+                      to participate.
+                    </div>
+                  )}
                 </DialogHeader>
               </DialogContent>
             </Dialog>
@@ -164,13 +215,12 @@ const Selectedfundraise = () => {
                 Help for the Poor Who Suffer from Mental Damage
               </h2>
               <p className="text-gray-300 mb-6 text-sm sm:text-base">
-                Your donation can provide food, shelter, and hope for those in need.
+                Your donation can provide food, shelter, and hope for those in
+                need.
               </p>
               <Dialog>
-                <DialogTrigger>
-                  <button className="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-red-500 px-6 py-3 rounded-md font-semibold text-white shadow-md hover:scale-105 transform transition duration-300">
-                    Donate
-                  </button>
+                <DialogTrigger className="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-red-500 px-6 py-3 rounded-md font-semibold text-white shadow-md hover:scale-105 transform transition duration-300">
+                  Donate
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
@@ -186,6 +236,7 @@ const Selectedfundraise = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
