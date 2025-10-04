@@ -8,9 +8,10 @@ import useAuthStore from "../../store/authStore.js";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const{email} = useAuthStore();
+  const { email } = useAuthStore();
   const [toggle, setToggle] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
+  const { logout } = useAuthStore();
 
   const logoutHandler = async () => {
     localStorage.removeItem("token");
@@ -20,6 +21,7 @@ const Navbar = () => {
       });
       if (res.data.success) {
         navigate("/login");
+        logout();
       }
     } catch (error) {
       console.log(error.message);
@@ -85,7 +87,7 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="flex items-center space-x-6 bg-green-800 py-1 hover:scale-110  px-4 rounded-md">
-              <li>
+              <li className="">
                 <Link to="/login" className="  transition">
                   Login
                 </Link>
@@ -110,7 +112,7 @@ const Navbar = () => {
       </div>
 
       {mobileMenu && (
-        <div className="md:hidden mt-3 space-y-4 px-4">
+        <div className="md:hidden absolute right-0 bg-[#043d43] py-4 w-1/2 px-4 mt-3 space-y-4 rounded-bl-lg items-center">
           <Link
             to="/"
             className="block hover:text-yellow-400"
@@ -133,7 +135,7 @@ const Navbar = () => {
             Blog
           </Link>
 
-          {tokendata ? (
+          {email ? (
             <>
               <Link
                 to="/dashboard"
@@ -156,14 +158,14 @@ const Navbar = () => {
             <>
               <Link
                 to="/signup"
-                className="block hover:text-yellow-400"
+                className="block bg-blue-400 px-4 py-2"
                 onClick={() => setMobileMenu(false)}
               >
                 Register
               </Link>
               <Link
                 to="/login"
-                className="block hover:text-yellow-400"
+                className="block hover:text-yellow-400 bg-green-400 px-4 py-2"
                 onClick={() => setMobileMenu(false)}
               >
                 Login

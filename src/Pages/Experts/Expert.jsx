@@ -18,7 +18,7 @@ const Expert = () => {
   ];
 
   return (
-    <div className="flex flex-col bg-[#032225] py-12 px-4 md:px-12 w-full items-center">
+    <div className="flex flex-col  py-12 px-4 md:px-12 w-full items-center">
       {/* Heading */}
       <div className="text-center max-w-3xl mb-8">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-600 mb-4">

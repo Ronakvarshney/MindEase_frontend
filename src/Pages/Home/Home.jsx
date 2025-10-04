@@ -54,10 +54,10 @@ const Home = () => {
 
   return (
     <div>
-      <div className="flex flex-col justify-center items-center bg-[#041e22]">
+      <div className="flex flex-col justify-center items-center font-manrope bg-gray-100">
         <div className="flex flex-col md:flex-row items-center justify-between w-full px-6 py-12 ">
           <div className="w-full md:w-1/2 text-center md:text-left ml-5 space-y-6">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-200 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-600 leading-tight">
               Empower Your Mind, <br /> Embrace a Healthier Tomorrow{" "}
             </h1>
             <p className="text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed">
@@ -93,7 +93,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="text-center mt-6 text-white px-4 sm:px-6">
+        <div className="text-center mt-6 text-gray-700 px-4 sm:px-6">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4">
             Welcome to Our Crisis Management Platform
           </h1>
@@ -144,7 +144,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center text-white gap-6 mb-10 px-4 bg-[#021416] py-10 w-full">
+        <div className="flex flex-col items-center text-white bg-gray-300 gap-6  px-4  py-10 w-full">
           <h1 className="text-3xl md:text-5xl font-bold text-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
             Support Our Work
           </h1>
@@ -203,7 +203,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="w-full flex flex-col md:flex-row items-center gap-6 md:gap-12 px-4 md:px-12 py-6">
+        <div className="w-full flex flex-col md:flex-row bg-[#03252a] items-center gap-6 md:gap-12 px-4 md:px-12 py-6">
           <div className="w-full md:w-1/2 text-center md:text-left space-y-4">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-600">
               ᴘʀɪᴏʀɪᴛɪᴢᴇ ʏᴏᴜʀ ᴍᴇɴᴛᴀʟ ʜᴇᴀʟᴛʜ

@@ -23,9 +23,10 @@ const useAuthStore = create((set) => ({
   },
 
   logout: () => {
-    sessionStorage.removeItem("token");
     sessionStorage.removeItem("email");
+    sessionStorage.removeItem("token");
     sessionStorage.removeItem("role");
+    sessionStorage.clear();
     set({ token: null, email: null, role: null });
   },
 }));
