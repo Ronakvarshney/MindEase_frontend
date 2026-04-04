@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { user, logout } = useAuthStore();
+  console.log(user)
   const navigate = useRouter();
   const mounted = useMounted();
 

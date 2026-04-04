@@ -14,7 +14,7 @@ import { useAuthStore } from "@/store/authStore";
 
 const Page: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const { setuser, user } = useAuthStore();
+  const { setuser} = useAuthStore();
   const navigate = useRouter();
   const [loading, setloading] = useState(false);
 
@@ -72,9 +72,9 @@ const Page: React.FC = () => {
           return;
         } else {
           const response = await axios.post(
-            "http://localhost:5000/api/v1/login", 
+            "http://localhost:5000/api/v1/login",
             formData,
-            {withCredentials : true}
+            { withCredentials: true },
           );
           if (response.data.success) {
             setuser(response.data.user);

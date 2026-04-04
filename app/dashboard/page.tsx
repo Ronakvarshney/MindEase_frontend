@@ -1,29 +1,27 @@
-"use client"
-
+// /dashboard/page.js
+"use client";
+import { useEffect } from "react";
 import { useAuthStore } from "@/store/authStore";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-
-export default function Page() {
+export default function DashboardRedirect() {
   const { user } = useAuthStore();
+  const router = useRouter();
 
-  if (!user) {
-    redirect("/login");
-  }
+  useEffect(() => {
+    if (!user) {
+      router.replace("/login");
+      return;
+    }
 
-  const { role } = user;
+    if (user.role === "patient") {
+      router.replace("/dashboard/patient");
+    } else if (user.role === "therapist") {
+      router.replace("/dashboard/therapist");
+    } else {
+      router.replace("/dashboard/admin");
+    }
+  }, [user, router]);
 
-  if (role === "admin") {
-    redirect("/dashboard/admin");
-  }
-
-  if (role === "patient") {
-    redirect("/dashboard/patient");
-  }
-
-  if (role === "therapist") {
-    redirect("/dashboard/therapist");
-  }
-
-  return <div> Page</div>;
+  return null;
 }
