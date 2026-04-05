@@ -59,7 +59,6 @@ export default function Page() {
   return (
     <div className="pt-20 pb-10 bg-cream flex justify-center min-h-screen px-2 sm:px-4">
       <div className="w-full max-w-[1600px] flex bg-transparent">
-        {/* ================= Sidebar ================= */}
         <div className="hidden md:flex md:w-[28%] min-w-[280px] border-r-2 bg-white border-slate-700 p-6 flex-col gap-6">
           <div>
             <h2 className="text-xl font-black text-slate-800 mb-2">

@@ -1,79 +1,161 @@
 "use client";
 
-import { ArrowRight, Flower, Sparkles } from "lucide-react";
-import { FadeIn } from "./FadeIn";
+import { ArrowRight, Sparkles, ShieldCheck, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuthStore } from "@/store/authStore";
 
+const stats = [
+  { label: "Active Members", value: "12k+" },
+  { label: "Sessions Today", value: "340" },
+  { label: "Support Groups", value: "48" },
+];
+
 export default function Hero() {
   const { user } = useAuthStore();
+
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-100 rounded-full blob opacity-40"></div>
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-sky-100 rounded-full blob opacity-40"></div>
+    <section className="relative min-h-screen bg-[#1a1a1a] overflow-hidden flex items-center">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <FadeIn>
-          <span className="inline-block px-4 py-1.5 rounded-full bg-indigo-50 text-indigo-600 text-sm font-semibold mb-6">
-            Your wellbeing, prioritized
-          </span>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
-            A gentler way to <br />
-            <span className="text-indigo-600">find your balance.</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
-            Safe, private, and judgment-free emotional support whenever you need
-            it. Your journey to mental wellness starts with a single, small
-            step.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href={`${user}` ? "/" : "/login"}
-              className="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white rounded-2xl font-semibold hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200/50 flex items-center justify-center gap-2"
-            >
-              Start Anonymously <ArrowRight size={18} />
-            </Link>
-            <Link
-              href={`${user}` ? "/" : "/login"}
-              className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-2xl font-semibold hover:bg-slate-50 transition-all"
-            >
-              Explore Resources
-            </Link>
-          </div>
-        </FadeIn>
+      {/* Subtle grid background */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)`,
+          backgroundSize: "48px 48px",
+        }}
+      />
 
-        <div className="mt-16 relative mx-auto max-w-3xl">
-          <div className="absolute -top-10 z-4 -left-8 p-6 bg-white/90 backdrop-blur-md rounded-[2rem] shadow-2xl border border-white/50 flex items-center gap-4 animate-float">
-            <div className="w-12 h-12 bg-mental-blue rounded-2xl flex items-center justify-center text-yellow-600">
-              <Sparkles size={24} />
+      {/* Green glow top-right */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-10 pointer-events-none"
+        style={{ background: "radial-gradient(circle, #1D9E75 0%, transparent 70%)" }}
+      />
+      {/* Green glow bottom-left */}
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-8 pointer-events-none"
+        style={{ background: "radial-gradient(circle, #1D9E75 0%, transparent 70%)" }}
+      />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+          {/* Left — Text */}
+          <div className="flex flex-col gap-8">
+
+            {/* Badge */}
+            <div className="flex items-center gap-2 w-fit px-4 py-2 rounded-full border border-[#1D9E75]/30 bg-[#1D9E75]/10">
+              <ShieldCheck size={14} className="text-[#1D9E75]" />
+              <span className="text-xs font-semibold text-[#1D9E75] tracking-wide uppercase">
+                Safe & Anonymous Support
+              </span>
             </div>
-            <div className="text-left">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                Active wellness
+
+            {/* Heading */}
+            <div className="flex flex-col gap-4">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
+                You don't have to{" "}
+                <br />
+                <span
+                  className="relative inline-block"
+                  style={{
+                    WebkitTextFillColor: "transparent",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(90deg, #1D9E75, #5DCAA5)",
+                  }}
+                >
+                  face it alone.
+                </span>
+              </h1>
+              <p className="text-base md:text-lg text-white/50 leading-relaxed max-w-md">
+                A calm, judgment-free space to connect with others who truly
+                understand. Share, listen, and heal — at your own pace.
               </p>
-              <p className="text-sm font-black text-slate-800">
-                Mindful Morning
-              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link
+                href={user ? "/dashboard" : "/login"}
+                className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#1D9E75] hover:bg-[#178a64] text-white text-sm font-semibold transition-all duration-200"
+              >
+                Start Anonymously
+                <ArrowRight size={16} />
+              </Link>
+              <Link
+                href={user ? "/dashboard" : "/login"}
+                className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/10 hover:bg-white/5 text-white/70 hover:text-white text-sm font-semibold transition-all duration-200"
+              >
+                Explore Resources
+              </Link>
+            </div>
+
+            {/* Stats */}
+            <div className="flex items-center gap-8 pt-4 border-t border-white/8">
+              {stats.map((s) => (
+                <div key={s.label} className="flex flex-col gap-0.5">
+                  <span className="text-xl font-bold text-white">{s.value}</span>
+                  <span className="text-xs text-white/40">{s.label}</span>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
-            <Image
-              src="/mental-health-care-sketch-diagram.jpg"
-              width={200}
-              height={200}
-              alt="Person meditating in nature"
-              className="w-full h-auto grayscale-[20%] brightness-110"
-            />
-          </div>
-          <div className="absolute -bottom-16 -right-12 flex gap-4 items-end">
-            <div className="animate-spin-slow">
-              <Flower className="text-rose-400" size={56} strokeWidth={1.5} />
+
+          {/* Right — Visual Card Stack */}
+          <div className="relative flex items-center justify-center lg:justify-end">
+
+            {/* Main image card */}
+            <div className="relative w-full max-w-sm">
+              <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#222222]">
+                <Image
+                  src="/mental-health-care-sketch-diagram.jpg"
+                  width={600}
+                  height={500}
+                  alt="Mental wellness"
+                  className="w-full h-72 object-cover opacity-80"
+                />
+                {/* Overlay gradient on image */}
+                <div className="absolute inset-0 rounded-2xl"
+                  style={{ background: "linear-gradient(to top, #1a1a1a 0%, transparent 50%)" }}
+                />
+              </div>
+
+              {/* Floating card — top left */}
+              <div className="absolute -top-5 -left-10 bg-[#222222] border border-white/10 rounded-2xl p-4 flex items-center gap-3 shadow-xl">
+                <div className="w-10 h-10 rounded-xl bg-[#1D9E75]/20 flex items-center justify-center flex-shrink-0">
+                  <Sparkles size={18} className="text-[#1D9E75]" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest">
+                    Active now
+                  </p>
+                  <p className="text-sm font-semibold text-white">Mindful Morning</p>
+                </div>
+              </div>
+
+              {/* Floating card — bottom right */}
+              <div className="absolute -bottom-6 -right-8 bg-[#222222] border border-white/10 rounded-2xl p-4 flex items-center gap-3 shadow-xl">
+                <div className="w-10 h-10 rounded-xl bg-[#1D9E75]/20 flex items-center justify-center flex-shrink-0">
+                  <Users size={18} className="text-[#1D9E75]" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest">
+                    Support group
+                  </p>
+                  <p className="text-sm font-semibold text-white">Anxiety Warriors</p>
+                </div>
+              </div>
+
+              {/* Online indicator card */}
+              <div className="absolute -bottom-5 left-4 bg-[#222222] border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2 shadow-xl">
+                <span className="w-2 h-2 rounded-full bg-[#1D9E75] animate-pulse" />
+                <span className="text-xs text-white/60 font-medium">
+                  128 people online right now
+                </span>
+              </div>
             </div>
-            <div className="animate-float mb-6">
-              <Flower className="text-indigo-400" size={40} strokeWidth={1.5} />
-            </div>
           </div>
+
         </div>
       </div>
     </section>

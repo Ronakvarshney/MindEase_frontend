@@ -1,89 +1,136 @@
-"use client"
+"use client";
 
-import { Heart } from "lucide-react";
+import { Heart, Github, Twitter, Instagram } from "lucide-react";
+import Link from "next/link";
+
+const platform = [
+  { label: "AI Chat Support", href: "/chat" },
+  { label: "Mood Journaling", href: "#" },
+  { label: "Find a Therapist", href: "/therepist" },
+  { label: "Support Groups", href: "/groups" },
+  { label: "Safety Standards", href: "#" },
+];
+
+const company = [
+  { label: "About Us", href: "#" },
+  { label: "Privacy Policy", href: "#" },
+  { label: "Terms of Service", href: "#" },
+  { label: "Contact Support", href: "#" },
+];
+
+const socials = [
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Github, href: "#", label: "Github" },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-400 py-16">
+    <footer className="bg-[#141414] border-t border-white/8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
-                <Heart className="text-white w-5 h-5" fill="white" />
+
+        {/* Main grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 py-16">
+
+          {/* Brand col */}
+          <div className="md:col-span-2 flex flex-col gap-6">
+            <Link href="/" className="flex items-center gap-2.5 w-fit group">
+              <div className="w-8 h-8 bg-[#1D9E75] rounded-lg flex items-center justify-center group-hover:opacity-85 transition-opacity">
+                <Heart className="text-white w-4 h-4" fill="white" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-white">
+              <span className="text-base font-semibold tracking-tight text-white">
                 MindEase
               </span>
-            </div>
-            <p className="text-slate-500 max-w-sm mb-6 leading-relaxed">
-              MindEase is a modern mental health platform providing safe,
-              accessible emotional support for everyone.
+            </Link>
+
+            <p className="text-sm text-white/35 max-w-xs leading-relaxed">
+              A modern mental health platform providing safe, accessible
+              emotional support — whenever you need it most.
             </p>
-         
+
+            {/* Socials */}
+            <div className="flex items-center gap-2">
+              {socials.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    aria-label={s.label}
+                    className="w-8 h-8 rounded-lg border border-white/10 flex items-center justify-center text-white/30 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all duration-200"
+                  >
+                    <Icon size={14} />
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Crisis line */}
+            <div className="flex items-start gap-3 p-4 rounded-xl border border-[#1D9E75]/20 bg-[#1D9E75]/8">
+              <span className="w-2 h-2 rounded-full bg-[#1D9E75] animate-pulse mt-1 flex-shrink-0" />
+              <div>
+                <p className="text-xs font-semibold text-[#1D9E75] mb-0.5">
+                  Crisis Support Line
+                </p>
+                <p className="text-xs text-white/35 leading-relaxed">
+                  If you're in immediate distress, call{" "}
+                  <span className="text-white/60 font-medium">iCall: 9152987821</span>
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <h4 className="text-white font-bold mb-6">Platform</h4>
-            <ul className="space-y-4 text-sm">
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  AI Chat Support
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Mood Journaling
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Find a Therapist
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Safety Standards
-                </a>
-              </li>
+          {/* Platform links */}
+          <div className="flex flex-col gap-5">
+            <h4 className="text-xs font-semibold text-white/40 uppercase tracking-widest">
+              Platform
+            </h4>
+            <ul className="flex flex-col gap-3">
+              {platform.map((l) => (
+                <li key={l.label}>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-white/40 hover:text-white transition-colors duration-200"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-white font-bold mb-6">Company</h4>
-            <ul className="space-y-4 text-sm">
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Terms of Service
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Contact Support
-                </a>
-              </li>
+          {/* Company links */}
+          <div className="flex flex-col gap-5">
+            <h4 className="text-xs font-semibold text-white/40 uppercase tracking-widest">
+              Company
+            </h4>
+            <ul className="flex flex-col gap-3">
+              {company.map((l) => (
+                <li key={l.label}>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-white/40 hover:text-white transition-colors duration-200"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-800 text-xs text-center md:text-left flex flex-col md:flex-row justify-between gap-4">
-          <p>©{new Date().getFullYear()} MindEase Wellbeing Inc. All rights reserved.</p>
-          <p className="max-w-lg text-slate-500">
-            Disclaimer: Serenity uses AI to provide emotional support and
-            wellness guidance. It is not a substitute for clinical diagnosis or
-            treatment by a licensed medical professional.
+        {/* Bottom bar */}
+        <div className="border-t border-white/8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-white/25">
+            © {new Date().getFullYear()} MindEase Wellbeing Inc. All rights reserved.
+          </p>
+          <p className="text-xs text-white/20 max-w-md text-center md:text-right leading-relaxed">
+            MindEase uses AI to provide emotional support and wellness guidance.
+            It is not a substitute for clinical diagnosis or treatment by a
+            licensed medical professional.
           </p>
         </div>
+
       </div>
     </footer>
   );

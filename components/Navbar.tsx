@@ -1,14 +1,14 @@
 "use client";
+
 import { useMounted } from "@/hooks/mount";
 import { useAuthStore } from "@/store/authStore";
 import axios from "axios";
-import { Heart } from "lucide-react";
+import { Heart, LayoutDashboard, BookOpen, Info, LogOut, LogIn } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { user, logout } = useAuthStore();
-  console.log(user)
   const navigate = useRouter();
   const mounted = useMounted();
 
@@ -27,44 +27,77 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <nav className="fixed top-0 w-full z-50 bg-[#1a1a1a]/80 backdrop-blur-md border-b border-white/8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
-              <Heart className="text-white w-5 h-5" fill="white" />
+
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 bg-[#1D9E75] rounded-lg flex items-center justify-center transition-opacity group-hover:opacity-85">
+              <Heart className="text-white w-4 h-4" fill="white" />
             </div>
-            <Link href="/">
-              <span className="text-xl font-bold tracking-tight text-slate-800">
-                MindEase
-              </span>
-            </Link>
+            <span className="text-base font-semibold tracking-tight text-white">
+              MindEase
+            </span>
+          </Link>
+
+          {/* Nav Links */}
+          <div className="hidden md:flex items-center gap-1">
+            <a
+              href="#"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/6 transition-all"
+              style={{ backgroundColor: "transparent" }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.06)")}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}
+            >
+              <Info size={14} />
+              How it works
+            </a>
+            <a
+              href="/dashboard"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white transition-all"
+              style={{ backgroundColor: "transparent" }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.06)")}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}
+            >
+              <LayoutDashboard size={14} />
+              Dashboard
+            </a>
+            <a
+              href="#"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white transition-all"
+              style={{ backgroundColor: "transparent" }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.06)")}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}
+            >
+              <BookOpen size={14} />
+              Journaling
+            </a>
           </div>
 
-          <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
-            <a href="#" className="hover:text-indigo-600 transition-colors">How it works</a>
-            <a href="/dashboard" className="hover:text-indigo-600 transition-colors">Dashboard</a>
-            <a href="#" className="hover:text-indigo-600 transition-colors">Journaling</a>
-
-            {/* ✅ Only render auth UI after client hydration */}
+          {/* Auth Button */}
+          <div className="flex items-center">
             {!mounted ? (
-              <div className="w-24 h-9" /> // placeholder to prevent layout shift
+              <div className="w-24 h-9" />
             ) : user ? (
               <button
-                onClick={logoutHandler} // ✅ no need for arrow wrapper
-                className="bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition-all shadow-sm"
+                onClick={logoutHandler}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 text-sm text-white/60 hover:text-white hover:bg-white/6 transition-all"
               >
+                <LogOut size={14} />
                 Logout
               </button>
             ) : (
               <Link
                 href="/login"
-                className="bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition-all shadow-sm"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1D9E75] hover:bg-[#178a64] text-white text-sm font-semibold transition-all"
               >
-                Talk to AI
+                <LogIn size={14} />
+                Get Started
               </Link>
             )}
           </div>
+
         </div>
       </div>
     </nav>
