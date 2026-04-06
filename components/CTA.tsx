@@ -93,7 +93,7 @@ export const FinalCTA = () => (
         </div>
       </div>
 
-      <p className="text-center text-white/20 text-xs mt-8 italic">
+      <p className="text-center text-white/50 text-xs mt-8 italic">
         "Asking for help is the first act of courage." — MindEase
       </p>
     </div>

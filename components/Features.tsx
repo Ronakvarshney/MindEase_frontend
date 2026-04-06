@@ -24,7 +24,7 @@ const features = [
     icon: Sparkles,
     accent: "#5DCAA5",
     bg: "rgba(93,202,165,0.12)",
-    navigate: "/therepist",
+    navigate: "/tracking",
   },
   {
     title: "Self-Assessments",

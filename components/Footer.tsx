@@ -99,7 +99,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company links */}
           <div className="flex flex-col gap-5">
             <h4 className="text-xs font-semibold text-white/40 uppercase tracking-widest">
               Company
@@ -119,12 +118,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="border-t border-white/8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/25">
+          <p className="text-xs text-white/30">
             © {new Date().getFullYear()} MindEase Wellbeing Inc. All rights reserved.
           </p>
-          <p className="text-xs text-white/20 max-w-md text-center md:text-right leading-relaxed">
+          <p className="text-xs text-white/30 max-w-md text-center md:text-right leading-relaxed">
             MindEase uses AI to provide emotional support and wellness guidance.
             It is not a substitute for clinical diagnosis or treatment by a
             licensed medical professional.

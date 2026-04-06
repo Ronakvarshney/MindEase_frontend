@@ -4,22 +4,21 @@ import React, { useEffect, useState } from "react";
 import {
   Search,
   Filter,
-  Star,
   Clock,
   Calendar,
-  CheckCircle2,
   ArrowRight,
   Shield,
+  Video,
+  MapPin,
+  X,
 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FadeIn } from "@/components/FadeIn";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
@@ -31,405 +30,313 @@ interface Iformdata {
   meeting_time: string;
 }
 
+const filters = ["All", "Anxiety", "Depression", "Trauma", "Relationship", "Workplace"];
+
+const emptyForm: Iformdata = { cause: "", mode: "", date: "", contact_info: "", meeting_time: "" };
+
+const FormField = ({ label, children }: { label: string; children: React.ReactNode }) => (
+  <div className="flex flex-col gap-1.5">
+    <label className="text-xs font-semibold text-white/40 uppercase tracking-widest">{label}</label>
+    {children}
+  </div>
+);
+
+const inputCls = "w-full px-4 py-3 bg-[#2a2a2a] border border-white/8 rounded-xl text-sm text-white placeholder-white/20 outline-none focus:border-[#1D9E75]/50 transition-colors";
+
 export default function Page() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [therapists, setTherapists] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [fromdata, setformdata] = useState<Iformdata>({
-    cause: "",
-    mode: "",
-    date: "",
-    contact_info: "",
-    meeting_time: "",
-  });
-
-  const filters = [
-    "All",
-    "Anxiety",
-    "Depression",
-    "Trauma",
-    "Relationship",
-    "Workplace",
-  ];
+  const [formdata, setFormdata] = useState<Iformdata>(emptyForm);
 
   useEffect(() => {
     const getAllTherapists = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          "http://localhost:5000/api/v1/getalltherapists",
-        );
-        console.log(response.data);
+        const response = await axios.get("http://localhost:5000/api/v1/getalltherapists");
         setTherapists(response.data.therapists || []);
       } catch (error) {
-        console.error(error);
-        toast.error("Sorry, Therapists not exists.");
+        toast.error("Sorry, therapists not found.");
       } finally {
         setLoading(false);
       }
     };
-
     getAllTherapists();
   }, []);
 
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFormdata((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   const bookingHandler = async (id: string) => {
     if (!id) return;
-
     const toastId = toast.loading("Requesting booking...");
-
     try {
       const response = await axios.post(
         "http://localhost:5000/api/v1/requestbooking",
-        { fromdata, id },
-        { withCredentials: true },
+        { fromdata: formdata, id },
+        { withCredentials: true }
       );
-
       if (response.data.booking) {
         toast.success("Booking requested successfully!", { id: toastId });
       } else {
-        toast.error("Booking already exists with this therapist.", {
-          id: toastId,
-        });
+        toast.error("Booking already exists with this therapist.", { id: toastId });
       }
     } catch (error: any) {
-      const message =
-        error?.response?.data?.message ||
-        "Something went wrong. Please try again.";
-      toast.error(message, { id: toastId });
+      toast.error(error?.response?.data?.message || "Something went wrong.", { id: toastId });
     } finally {
-      setformdata({
-        cause: "",
-        contact_info: "",
-        mode: "",
-        date: "",
-        meeting_time: "",
-      });
+      setFormdata(emptyForm);
     }
   };
 
   const filteredTherapists = therapists.filter((t) => {
     const name = t.username?.toLowerCase() || "";
     const role = t.role?.toLowerCase() || "";
-    const specs = t.specialization;
-
-    const matchesSearch =
-      name.includes(searchQuery.toLowerCase()) ||
-      role.includes(searchQuery.toLowerCase()) ||
-      specs.includes(searchQuery.toLowerCase());
-
+    const specs = t.specialization || "";
+    const q = searchQuery.toLowerCase();
+    const matchesSearch = name.includes(q) || role.includes(q) || specs.includes(q);
     const matchesFilter =
       selectedFilter === "All" ||
-      t.specialization?.some((s: string) =>
-        s.toLowerCase().includes(selectedFilter.toLowerCase()),
-      );
-
+      t.specialization?.some((s: string) => s.toLowerCase().includes(selectedFilter.toLowerCase()));
     return matchesSearch && matchesFilter;
   });
 
   return (
-    <div className="pt-20 sm:pt-24 pb-16 sm:pb-20 min-h-screen">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#1a1a1a] pt-20 pb-16 px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto flex flex-col gap-10">
+
         {/* Header */}
-        <div className="text-center mb-10 sm:mb-16">
-          <FadeIn>
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full text-indigo-600 text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6">
-              <Shield size={12} className="sm:hidden" />
-              <Shield size={14} className="hidden sm:block" />
+        <div className="flex flex-col items-center text-center gap-5">
+          <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#1D9E75]/30 bg-[#1D9E75]/10">
+            <Shield size={13} className="text-[#1D9E75]" />
+            <span className="text-xs font-semibold text-[#1D9E75] tracking-widest uppercase">
               Verified & HIPAA Compliant
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 tracking-tighter mb-4 sm:mb-6">
-              Expert care for{" "}
-              <span className="text-mental-blue">every mind.</span>
-            </h1>
-
-            <p className="max-w-2xl mx-auto text-sm sm:text-lg text-slate-600 font-medium px-2">
-              Connect with certified professionals who understand your journey.
-            </p>
-          </FadeIn>
+            </span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+            Expert care for{" "}
+            <span
+              style={{
+                WebkitTextFillColor: "transparent",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                backgroundImage: "linear-gradient(90deg, #1D9E75, #5DCAA5)",
+              }}
+            >
+              every mind.
+            </span>
+          </h1>
+          <p className="text-white/40 text-sm max-w-xl leading-relaxed">
+            Connect with certified professionals who understand your journey.
+          </p>
         </div>
 
-        <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
-          <div className="flex flex-col md:flex-row gap-3 sm:gap-4">
-            <div className="relative flex-1 group">
-              <Search
-                className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 text-slate-400"
-                size={18}
-              />
-              <input
-                type="text"
-                placeholder="Search by name, specialty, or concern..."
-                className="w-full pl-11 sm:pl-14 pr-4 sm:pr-6 py-3 sm:py-4 bg-white border border-slate-200 rounded-2xl sm:rounded-[2rem] text-sm sm:text-base"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
+        {/* Search + Filters */}
+        <div className="flex flex-col gap-4">
+          <div className="relative">
+            <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/25" />
+            <input
+              type="text"
+              placeholder="Search by name, specialty, or concern..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-11 pr-4 py-3 bg-[#222222] border border-white/8 rounded-xl text-sm text-white placeholder-white/25 outline-none focus:border-white/15 transition-colors"
+            />
+          </div>
 
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
-              <Filter
-                size={18}
-                className="text-slate-400 mr-1 sm:mr-2 flex-shrink-0"
-              />
-              {filters.map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setSelectedFilter(f)}
-                  className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap ${
-                    selectedFilter === f
-                      ? "bg-mental-blue text-white"
-                      : "bg-white text-slate-600 border"
-                  }`}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
+          <div className="flex items-center gap-2 overflow-x-auto pb-1">
+            <Filter size={14} className="text-white/25 flex-shrink-0" />
+            {filters.map((f) => (
+              <button
+                key={f}
+                onClick={() => setSelectedFilter(f)}
+                className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                  selectedFilter === f
+                    ? "bg-[#1D9E75] text-white"
+                    : "border border-white/8 text-white/40 hover:border-white/15 hover:text-white/60"
+                }`}
+              >
+                {f}
+              </button>
+            ))}
           </div>
         </div>
 
+        {/* Loading */}
         {loading && (
-          <div className="text-center py-16 sm:py-20 text-slate-400 font-medium text-sm sm:text-base">
-            Loading therapists...
+          <div className="flex items-center justify-center py-20 gap-2">
+            <div className="w-4 h-4 border-2 border-[#1D9E75] border-t-transparent rounded-full animate-spin" />
+            <span className="text-xs text-white/30">Loading therapists...</span>
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8">
-          {filteredTherapists.map((t, index) => {
-            const availabilityText = t.availability?.length
-              ? `${t.availability[0].day} : ${t.availability[0].slot || t.availability[0].slots?.join(", ")}`
-              : "Not available";
+        {/* Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {filteredTherapists.map((t) => (
+            <div
+              key={t._id}
+              className="flex gap-5 p-5 rounded-2xl border border-white/8 bg-[#222222] hover:border-white/15 transition-all duration-200"
+            >
+              {/* Avatar */}
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden flex-shrink-0 bg-[#2a2a2a]">
+                <img
+                  src={t.profileImage || "https://via.placeholder.com/200"}
+                  alt={t.username}
+                  className="w-full h-full object-cover opacity-80"
+                />
+              </div>
 
-            return (
-              <FadeIn key={t._id} delay={index * 80}>
-                <div className="bg-white rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-8 border hover:shadow-2xl transition-all relative">
-                  <div className="w-full sm:w-48 h-44 sm:h-48 rounded-2xl sm:rounded-[2rem] overflow-hidden flex-shrink-0 bg-slate-100">
-                    <img
-                      src={t.profileImage || "https://via.placeholder.com/300"}
-                      alt={t.userId?.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+              {/* Info */}
+              <div className="flex-1 flex flex-col gap-3 min-w-0">
+                <div>
+                  <h3 className="text-base font-semibold text-white truncate">
+                    {t.username || "Therapist"}
+                  </h3>
+                  <p className="text-xs text-[#1D9E75] font-medium mt-0.5">
+                    {t.role || "Therapist"}
+                  </p>
+                </div>
 
-                  <div className="flex-1 space-y-3 sm:space-y-4">
-                    <div className="flex justify-between items-start gap-2">
-                      <div>
-                        <h3 className="text-lg sm:text-2xl font-black text-slate-900">
-                          {t.username || "Therapist"}
-                        </h3>
-                        <p className="text-mental-blue font-bold text-xs sm:text-sm">
-                          {t.role || "Therapist"}
-                        </p>
-                      </div>
-
-                      {/* <div className="flex items-center gap-1 bg-yellow-50 px-2 sm:px-3 py-1 rounded-full">
-                        <Star
-                          size={12}
-                          className="text-yellow-500"
-                          fill="currentColor"
-                        />
-                        <span className="text-xs sm:text-sm font-black text-yellow-700">
-                          4.8
-                        </span>
-                        <span className="text-[10px] sm:text-xs text-yellow-600/60">
-                          (120)
-                        </span>
-                      </div> */}
-                    </div>
-
-                    {/* Specializations */}
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                      {t.specialization}
-                    </div>
-
-                    {/* Meta */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 py-2 border-y">
-                      <div className="flex items-center gap-2 text-slate-500">
-                        <Clock size={14} />
-                        <span className="text-[11px] sm:text-xs font-medium">
-                          {t.experience} years exp
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2 text-slate-500">
-                        <Calendar size={14} />
-                        <div className="flex flex-col gap-1">
-                          {t.availableSlots?.slice(0, 2).map((it, i) => (
-                            <span key={i} className="text-xs">
-                              {it.day}: {it.startTime} - {it.endTime}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Footer */}
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
-                      <span className="text-base sm:text-lg font-black text-slate-800">
-                        ₹{t.consultationFee}/session
+                {/* Specs */}
+                {Array.isArray(t.specialization) && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {t.specialization.slice(0, 3).map((s: string, i: number) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-white/8 text-white/40 bg-white/3"
+                      >
+                        {s}
                       </span>
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <button
-                            // onClick={bookingHandler}
-                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-slate-900 text-white rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold hover:bg-mental-blue"
-                          >
-                            Book Session <ArrowRight size={14} />
-                          </button>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-[520px]">
-                          <DialogHeader>
-                            <DialogTitle>Book Therapy Session</DialogTitle>
-                            <DialogDescription>
-                              Fill in the details below to request a session
-                              with this therapist.
-                            </DialogDescription>
-                          </DialogHeader>
+                    ))}
+                  </div>
+                )}
 
-                          <form className="space-y-4 mt-4">
-                            {/* Cause / Reason */}
-                            <div className="space-y-1">
-                              <label className="text-sm font-semibold">
-                                Cause / Reason
-                              </label>
-                              <textarea
-                                name="cause"
-                                onChange={(e) =>
-                                  setformdata({
-                                    ...fromdata,
-                                    [e.target.name]: e.target.value,
-                                  })
-                                }
-                                placeholder="Briefly describe why you want to book this session"
-                                className="w-full min-h-[90px] rounded-xl border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-mental-blue"
-                              />
-                            </div>
+                {/* Meta */}
+                <div className="flex flex-wrap gap-4">
+                  <span className="flex items-center gap-1.5 text-xs text-white/30">
+                    <Clock size={11} /> {t.experience}y exp
+                  </span>
+                  {t.availableSlots?.[0] && (
+                    <span className="flex items-center gap-1.5 text-xs text-white/30">
+                      <Calendar size={11} />
+                      {t.availableSlots[0].day}: {t.availableSlots[0].startTime}
+                    </span>
+                  )}
+                </div>
 
-                            {/* Session Type */}
-                            <div className="space-y-1">
-                              <label className="text-sm font-semibold">
-                                Session Type
-                              </label>
-                              <select
-                                name="mode"
-                                onChange={(e) =>
-                                  setformdata({
-                                    ...fromdata,
-                                    [e.target.name]: e.target.value,
-                                  })
-                                }
-                                className="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-mental-blue"
-                              >
-                                <option value="">Select session type</option>
+                {/* Footer */}
+                <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/8">
+                  <span className="text-sm font-bold text-white">
+                    ₹{t.consultationFee}
+                    <span className="text-xs text-white/30 font-normal">/session</span>
+                  </span>
+
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#1D9E75] hover:bg-[#178a64] text-white text-xs font-semibold transition-all">
+                        Book Session <ArrowRight size={12} />
+                      </button>
+                    </DialogTrigger>
+
+                    <DialogContent className="bg-[#222222] border border-white/10 text-white max-w-md rounded-2xl p-0 overflow-hidden">
+                      {/* Green top strip */}
+                      <div className="h-1 w-full bg-gradient-to-r from-[#1D9E75] via-[#5DCAA5] to-[#1D9E75]" />
+
+                      <div className="p-6 flex flex-col gap-5">
+                        <DialogHeader>
+                          <DialogTitle className="text-base font-semibold text-white">
+                            Book a Session
+                          </DialogTitle>
+                          <p className="text-xs text-white/35 mt-1">
+                            Fill in the details to request a session with{" "}
+                            <span className="text-white/60">{t.username}</span>.
+                          </p>
+                        </DialogHeader>
+
+                        <div className="flex flex-col gap-4">
+                          <FormField label="Reason / Cause">
+                            <textarea
+                              name="cause"
+                              rows={3}
+                              placeholder="Briefly describe why you want to book..."
+                              value={formdata.cause}
+                              onChange={handleFormChange}
+                              className={inputCls + " resize-none"}
+                            />
+                          </FormField>
+
+                          <div className="grid grid-cols-2 gap-3">
+                            <FormField label="Session Type">
+                              <select name="mode" value={formdata.mode} onChange={handleFormChange} className={inputCls}>
+                                <option value="">Select type</option>
                                 <option value="online">Online</option>
                                 <option value="offline">Offline</option>
                               </select>
-                            </div>
+                            </FormField>
 
-                            {/* Desired Date & Time */}
-                            <div className="space-y-1">
-                              <label className="text-sm font-semibold">
-                                Desired Date & Time
-                              </label>
-                              <input
-                                name="date"
-                                onChange={(e) =>
-                                  setformdata({
-                                    ...fromdata,
-                                    [e.target.name]: e.target.value,
-                                  })
-                                }
-                                type="datetime-local"
-                                className="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-mental-blue"
-                              />
-                            </div>
-
-                            {/* Meeting Time Preference */}
-                            <div className="space-y-1">
-                              <label className="text-sm font-semibold">
-                                Preferred Meeting Time
-                              </label>
-                              <select
-                                name="meeting_time"
-                                onChange={(e) =>
-                                  setformdata({
-                                    ...fromdata,
-                                    [e.target.name]: e.target.value,
-                                  })
-                                }
-                                className="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-mental-blue"
-                              >
-                                <option value="">Select time slot</option>
+                            <FormField label="Time Preference">
+                              <select name="meeting_time" value={formdata.meeting_time} onChange={handleFormChange} className={inputCls}>
+                                <option value="">Select slot</option>
                                 <option value="morning">Morning</option>
                                 <option value="afternoon">Afternoon</option>
                                 <option value="evening">Evening</option>
                                 <option value="night">Night</option>
                               </select>
-                            </div>
+                            </FormField>
+                          </div>
 
-                            {/* Contact Info */}
-                            <div className="space-y-1">
-                              <label className="text-sm font-semibold">
-                                Contact Information
-                              </label>
-                              <input
-                                type="text"
-                                name="contact_info"
-                                onChange={(e) =>
-                                  setformdata({
-                                    ...fromdata,
-                                    [e.target.name]: e.target.value,
-                                  })
-                                }
-                                placeholder="Phone number or email"
-                                className="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-mental-blue"
-                              />
-                            </div>
+                          <FormField label="Desired Date & Time">
+                            <input
+                              type="datetime-local"
+                              name="date"
+                              value={formdata.date}
+                              onChange={handleFormChange}
+                              className={inputCls}
+                            />
+                          </FormField>
 
-                            {/* Actions */}
-                            <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  setformdata({
-                                    cause: "",
-                                    mode: "",
-                                    meeting_time: "",
-                                    date: "",
-                                    contact_info: "",
-                                  })
-                                }
-                                className="w-full sm:w-1/2 rounded-xl bg-gray-200 text-gray-800 py-2.5 font-semibold hover:bg-gray-300"
-                              >
-                                Cancel
-                              </button>
+                          <FormField label="Contact Info">
+                            <input
+                              type="text"
+                              name="contact_info"
+                              placeholder="Phone number or email"
+                              value={formdata.contact_info}
+                              onChange={handleFormChange}
+                              className={inputCls}
+                            />
+                          </FormField>
+                        </div>
 
-                              <button
-                                type="button"
-                                onClick={() => bookingHandler(t?._id)}
-                                className="w-full sm:w-1/2 rounded-xl bg-slate-900 text-white py-2.5 font-semibold hover:bg-mental-blue"
-                              >
-                                Submit Booking Request
-                              </button>
-                            </div>
-                          </form>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  </div>
-
-                  {/* Decor */}
-                  <div className="absolute top-0 right-0 p-3 sm:p-4 opacity-10 hidden sm:block">
-                    <CheckCircle2 size={70} className="text-mental-blue" />
-                  </div>
+                        <div className="flex gap-3 pt-2">
+                          <button
+                            type="button"
+                            onClick={() => setFormdata(emptyForm)}
+                            className="flex-1 py-3 rounded-xl border border-white/10 text-white/40 hover:text-white hover:border-white/20 text-sm font-semibold transition-all"
+                          >
+                            Clear
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => bookingHandler(t._id)}
+                            className="flex-1 py-3 rounded-xl bg-[#1D9E75] hover:bg-[#178a64] text-white text-sm font-semibold transition-all"
+                          >
+                            Submit Request
+                          </button>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </div>
-              </FadeIn>
-            );
-          })}
+              </div>
+            </div>
+          ))}
         </div>
 
         {!loading && filteredTherapists.length === 0 && (
-          <div className="text-center py-16 sm:py-20 text-slate-400 text-sm sm:text-base">
-            No therapists found.
+          <div className="flex flex-col items-center justify-center py-20 gap-3 text-white/20">
+            <Search size={32} />
+            <p className="text-sm">No therapists found matching your search.</p>
           </div>
         )}
       </div>

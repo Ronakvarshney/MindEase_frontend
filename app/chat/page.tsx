@@ -1,16 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Send,
   User,
-  Brain,
   Heart,
   Shield,
   Info,
   ArrowRight,
+  Brain,
+  Sparkles,
+  Wind,
+  BookOpen,
 } from "lucide-react";
-import { FadeIn } from "@/components/FadeIn";
 import axios from "axios";
 
 interface Message {
@@ -18,15 +20,34 @@ interface Message {
   text: string;
 }
 
+const suggestions = [
+  "I'm feeling anxious today",
+  "I need help relaxing",
+  "I just need to talk",
+  "Give me self-care tips",
+];
+
+const capabilities = [
+  { icon: Sparkles, label: "Anxiety & stress relief" },
+  { icon: BookOpen, label: "Emotional journaling" },
+  { icon: Wind, label: "Self-care guidance" },
+  { icon: Brain, label: "Thought clarity" },
+];
+
 export default function Page() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "model",
-      text: "Hello, I'm Serenity. I'm here to listen and support you in a safe, judgment-free space. How are you feeling today?",
+      text: "Hello, I'm MindEase. I'm here to listen and support you in a safe, judgment-free space. How are you feeling today?",
     },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isLoading]);
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
@@ -37,11 +58,15 @@ export default function Page() {
     setInput("");
 
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/chatting", { message: input });
-      console.log(response.data);
-      const modelmessage : Message = {role : 'model' , text : response?.data?.response.kwargs?.content} ;
-      setMessages((prev)=>[...prev ,modelmessage ])
-      // TODO: push model reply into messages when backend returns it
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/chatting",
+        { message: input },
+      );
+      const modelMessage: Message = {
+        role: "model",
+        text: response?.data?.response.kwargs?.content,
+      };
+      setMessages((prev) => [...prev, modelMessage]);
     } catch (error) {
       console.error(error);
     } finally {
@@ -49,191 +74,191 @@ export default function Page() {
     }
   };
 
-  const suggestions = [
-    "I'm feeling a bit anxious today",
-    "I need help relaxing",
-    "I just need someone to talk to",
-    "What are some self-care tips?",
-  ];
-
   return (
-    <div className="pt-20 pb-10 bg-cream flex justify-center min-h-screen px-2 sm:px-4">
-      <div className="w-full max-w-[1600px] flex bg-transparent">
-        <div className="hidden md:flex md:w-[28%] min-w-[280px] border-r-2 bg-white border-slate-700 p-6 flex-col gap-6">
-          <div>
-            <h2 className="text-xl font-black text-slate-800 mb-2">
-              Mental Wellness
-            </h2>
-            <p className="text-sm text-slate-500 leading-relaxed">
-              A safe space to reflect, understand your emotions, and find calm
-              through guided AI support.
-            </p>
+    <div className="min-h-screen bg-[#1a1a1a] pt-16 flex">
+      <aside className="hidden md:flex w-[280px] min-w-[280px] flex-col gap-6 p-6 border-r border-white/8 bg-[#222222]">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-[#1D9E75]/20 flex items-center justify-center">
+              <Heart
+                size={16}
+                className="text-[#1D9E75]"
+                fill="rgba(29,158,117,0.6)"
+              />
+            </div>
+            <span className="text-sm font-semibold text-white">
+              MindEase AI
+            </span>
           </div>
+          <p className="text-xs text-white/35 leading-relaxed">
+            A safe space to reflect, understand your emotions, and find calm
+            through guided AI support.
+          </p>
+        </div>
 
-          <div className="space-y-3">
-            <button className="w-full flex items-center justify-between bg-indigo-600 text-white px-5 py-4 rounded-2xl font-bold shadow-md hover:bg-indigo-700 transition">
-              Analyze Mental Health Report
-              <ArrowRight size={18} />
-            </button>
+        <div className="flex flex-col gap-2">
+          <button className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-[#1D9E75] hover:bg-[#178a64] text-white text-sm font-semibold transition-all">
+            Analyze Health Report
+            <ArrowRight size={15} />
+          </button>
+          <button className="w-full px-4 py-3 rounded-xl border border-white/10 hover:bg-white/5 text-white/60 hover:text-white text-sm font-semibold transition-all text-left">
+            Talk & Feel Relaxed
+          </button>
+        </div>
 
-            <button className="w-full bg-indigo-50 text-indigo-700 px-5 py-4 rounded-2xl font-bold hover:bg-indigo-100 transition">
-              Talk & Feel Relaxed
-            </button>
-          </div>
-
-          <div className="mt-6 bg-slate-50 rounded-2xl p-5 border border-slate-100">
-            <h3 className="text-sm font-black text-slate-700 mb-2">
-              What Serenity Can Help With
-            </h3>
-            <ul className="text-xs text-slate-500 space-y-2 leading-relaxed">
-              <li>• Anxiety & stress relief</li>
-              <li>• Emotional journaling</li>
-              <li>• Self-care guidance</li>
-              <li>• Thought clarity</li>
-            </ul>
+        <div className="flex flex-col gap-3">
+          <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest">
+            What I can help with
+          </p>
+          <div className="flex flex-col gap-1">
+            {capabilities.map((c, i) => {
+              const Icon = c.icon;
+              return (
+                <div
+                  key={i}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors"
+                >
+                  <div className="w-6 h-6 rounded-lg bg-[#1D9E75]/15 flex items-center justify-center flex-shrink-0">
+                    <Icon size={12} className="text-[#1D9E75]" />
+                  </div>
+                  <span className="text-xs text-white/40">{c.label}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        <div className="w-full md:w-[72%] h-[85vh] md:h-[90vh] mx-auto px-2 sm:px-4 flex flex-col">
-          {/* Header */}
-          <div className="mb-2 flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-black text-slate-800 flex items-center gap-2">
-                <Brain className="text-indigo-500" />
-                Serenity AI
-              </h1>
-              <p className="text-xs text-slate-500 mt-1 max-w-xs">
-                A compassionate AI companion designed to listen, support, and
-                guide you gently.
-              </p>
-              <div className="flex items-center gap-2 text-xs text-slate-500 font-medium mt-2">
-                <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
-                Online & listening
+        <div className="mt-auto flex items-center gap-2 px-3 py-2.5 rounded-xl border border-white/8 bg-white/3">
+          <Shield size={13} className="text-[#1D9E75] flex-shrink-0" />
+          <span className="text-[10px] font-semibold text-white/30 uppercase tracking-widest">
+            Private & Secure
+          </span>
+        </div>
+      </aside>
+
+      <div className="flex-1 flex flex-col min-w-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/8">
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <Brain size={16} className="text-[#1D9E75]" />
+              <h1 className="text-sm font-semibold text-white">MindEase AI</h1>
+            </div>
+            <p className="text-xs text-white/35">
+              A compassionate AI companion — here to listen and guide you
+              gently.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#1D9E75] animate-pulse" />
+            <span className="text-xs text-white/30 font-medium">
+              Online & listening
+            </span>
+          </div>
+        </div>
+
+        <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-6 flex flex-col gap-4">
+          {messages.map((msg, i) => (
+            <div
+              key={i}
+              className={`flex items-end gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}
+            >
+              <div
+                className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                  msg.role === "user" ? "bg-[#1D9E75]/20" : "bg-rose-500/15"
+                }`}
+              >
+                {msg.role === "user" ? (
+                  <User size={14} className="text-[#1D9E75]" />
+                ) : (
+                  <Heart
+                    size={14}
+                    className="text-rose-400"
+                    fill="rgba(251,113,133,0.7)"
+                  />
+                )}
+              </div>
+
+              <div
+                className={`max-w-[70%] px-5 py-3.5 rounded-2xl text-sm leading-relaxed ${
+                  msg.role === "user"
+                    ? "bg-[#1D9E75] text-white rounded-br-sm"
+                    : "bg-[#2a2a2a] text-white/80 border border-white/8 rounded-bl-sm"
+                }`}
+              >
+                {msg.text}
               </div>
             </div>
+          ))}
 
-            <div className="bg-white px-4 py-2 rounded-2xl border border-slate-100 flex items-center gap-2 shadow-sm">
-              <Shield size={16} className="text-indigo-400" />
-              <span className="text-xs font-bold text-slate-600 uppercase tracking-widest">
-                Private & Secure
-              </span>
-            </div>
-          </div>
-
-          {/* Chat Box */}
-          <div className="flex-1 bg-white/50 backdrop-blur-md rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col overflow-hidden min-h-1/2">
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-2 no-scrollbar">
-              {messages.map((msg, i) => (
-                <FadeIn key={i} delay={0}>
-                  <div
-                    className={`flex ${
-                      msg.role === "user"
-                        ? "justify-end"
-                        : "justify-start"
-                    }`}
-                  >
-                    <div
-                      className={`flex max-w-[85%] gap-3 ${
-                        msg.role === "user"
-                          ? "flex-row-reverse"
-                          : "flex-row"
-                      }`}
-                    >
-                      <div
-                        className={`w-10 h-10 rounded-2xl flex-shrink-0 flex items-center justify-center ${
-                          msg.role === "user"
-                            ? "bg-indigo-100 text-indigo-600"
-                            : "bg-rose-100 text-rose-500"
-                        }`}
-                      >
-                        {msg.role === "user" ? (
-                          <User size={20} />
-                        ) : (
-                          <Heart size={20} fill="currentColor" />
-                        )}
-                      </div>
-
-                      <div
-                        className={`p-5 rounded-[2rem] text-sm leading-relaxed shadow-sm border ${
-                          msg.role === "user"
-                            ? "bg-indigo-600 text-white border-indigo-500 rounded-tr-none"
-                            : "bg-white text-slate-700 border-slate-50 rounded-tl-none"
-                        }`}
-                      >
-                        {msg.text}
-                      </div>
-                    </div>
-                  </div>
-                </FadeIn>
-              ))}
-
-              {isLoading && (
-                <div className="flex justify-start">
-                  <div className="flex gap-3 items-center">
-                    <div className="w-10 h-10 rounded-2xl bg-rose-100 text-rose-500 flex items-center justify-center animate-pulse">
-                      <Heart size={20} fill="currentColor" />
-                    </div>
-                    <div className="p-4 bg-white rounded-2xl border border-slate-50 flex gap-1">
-                      <span className="w-2 h-2 bg-slate-200 rounded-full animate-bounce"></span>
-                      <span
-                        className="w-2 h-2 bg-slate-200 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
-                      ></span>
-                      <span
-                        className="w-2 h-2 bg-slate-200 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.4s" }}
-                      ></span>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Suggestions */}
-            {messages.length === 1 && (
-              <div className="px-4 sm:px-6 py-4 flex flex-wrap gap-2">
-                {suggestions.map((s, i) => (
-                  <button
+          {isLoading && (
+            <div className="flex items-end gap-3">
+              <div className="w-7 h-7 rounded-lg bg-rose-500/15 flex items-center justify-center flex-shrink-0">
+                <Heart
+                  size={14}
+                  className="text-rose-400 animate-pulse"
+                  fill="rgba(251,113,133,0.7)"
+                />
+              </div>
+              <div className="px-5 py-3.5 rounded-2xl rounded-bl-sm bg-[#2a2a2a] border border-white/8 flex gap-1.5 items-center">
+                {[0, 1, 2].map((i) => (
+                  <span
                     key={i}
-                    onClick={() => setInput(s)}
-                    className="px-4 py-2 bg-white/80 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-100 rounded-full text-xs font-bold text-slate-500 transition-all"
-                  >
-                    {s}
-                  </button>
+                    className="w-1.5 h-1.5 rounded-full bg-white/25 animate-bounce"
+                    style={{ animationDelay: `${i * 0.15}s` }}
+                  />
                 ))}
               </div>
-            )}
-
-            {/* Input */}
-            <div className="p-4 sm:p-6 bg-white border-t border-slate-100">
-              <div className="relative">
-                <textarea
-                  rows={2}
-                  placeholder="Take your time… what’s been on your mind?"
-                  className="w-full pl-6 pr-16 py-4 bg-slate-50 border border-slate-100 rounded-[2rem] focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all resize-none text-sm font-medium"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                />
-
-                <button
-                  onClick={handleSend}
-                  disabled={isLoading || !input.trim()}
-                  className={`absolute right-2 top-1/2 -translate-y-1/2 p-3 rounded-full transition-all ${
-                    input.trim()
-                      ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200"
-                      : "bg-slate-200 text-slate-400"
-                  }`}
-                >
-                  <Send size={20} />
-                </button>
-              </div>
-
-              <div className="mt-4 flex items-center gap-2 justify-center text-[10px] text-slate-400 font-medium uppercase tracking-widest">
-                <Info size={12} />
-                Serenity AI can make mistakes. For crises, call 988 (US) or your
-                local emergency services.
-              </div>
             </div>
+          )}
+
+          <div ref={bottomRef} />
+        </div>
+
+        {messages.length === 1 && (
+          <div className="px-6 sm:px-8 pb-4 flex flex-wrap gap-2">
+            {suggestions.map((s, i) => (
+              <button
+                key={i}
+                onClick={() => setInput(s)}
+                className="px-4 py-2 rounded-full border border-white/10 bg-white/4 hover:bg-white/8 hover:border-white/20 text-xs text-white/45 hover:text-white/70 font-medium transition-all"
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div className="px-4 sm:px-8 pb-6 pt-2 border-t border-white/8">
+          <div className="relative flex items-end gap-3">
+            <textarea
+              rows={2}
+              placeholder="Take your time… what's been on your mind?"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSend();
+                }
+              }}
+              className="flex-1 resize-none px-5 py-3.5 rounded-2xl bg-[#2a2a2a] border border-white/10 focus:border-white/20 text-sm text-white placeholder-white/25 outline-none transition-colors leading-relaxed"
+            />
+            <button
+              onClick={handleSend}
+              disabled={isLoading || !input.trim()}
+              className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all mb-0.5 ${
+                input.trim()
+                  ? "bg-[#1D9E75] hover:bg-[#178a64] text-white"
+                  : "bg-white/8 text-white/20 cursor-not-allowed"
+              }`}
+            >
+              <Send size={16} />
+            </button>
+          </div>
+
+          <div className="mt-3 flex items-center justify-center gap-1.5 text-[10px] text-white/20 font-medium uppercase tracking-widest">
+            <Info size={11} />
+            MindEase AI can make mistakes. For crises, call iCall: 9152987821
           </div>
         </div>
       </div>

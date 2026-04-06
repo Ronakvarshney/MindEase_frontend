@@ -6,9 +6,9 @@ import Link from "next/link";
 import { useAuthStore } from "@/store/authStore";
 
 const stats = [
-  { label: "Active Members", value: "12k+" },
-  { label: "Sessions Today", value: "340" },
-  { label: "Support Groups", value: "48" },
+  { label: "Always Available", value: "24/7" },
+  { label: "Anonymous", value: "100%" },
+  { label: "Support Groups", value: "5+" },
 ];
 
 export default function Hero() {
@@ -16,8 +16,6 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen bg-[#1a1a1a] overflow-hidden flex items-center">
-
-      {/* Subtle grid background */}
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{
@@ -27,22 +25,22 @@ export default function Hero() {
         }}
       />
 
-      {/* Green glow top-right */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-10 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #1D9E75 0%, transparent 70%)" }}
+      <div
+        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-10 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, #1D9E75 0%, transparent 70%)",
+        }}
       />
-      {/* Green glow bottom-left */}
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-8 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #1D9E75 0%, transparent 70%)" }}
+      <div
+        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-8 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, #1D9E75 0%, transparent 70%)",
+        }}
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-
-          {/* Left — Text */}
           <div className="flex flex-col gap-8">
-
-            {/* Badge */}
             <div className="flex items-center gap-2 w-fit px-4 py-2 rounded-full border border-[#1D9E75]/30 bg-[#1D9E75]/10">
               <ShieldCheck size={14} className="text-[#1D9E75]" />
               <span className="text-xs font-semibold text-[#1D9E75] tracking-wide uppercase">
@@ -53,8 +51,7 @@ export default function Hero() {
             {/* Heading */}
             <div className="flex flex-col gap-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
-                You don't have to{" "}
-                <br />
+                You don't have to <br />
                 <span
                   className="relative inline-block"
                   style={{
@@ -73,7 +70,6 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href={user ? "/dashboard" : "/login"}
@@ -94,18 +90,17 @@ export default function Hero() {
             <div className="flex items-center gap-8 pt-4 border-t border-white/8">
               {stats.map((s) => (
                 <div key={s.label} className="flex flex-col gap-0.5">
-                  <span className="text-xl font-bold text-white">{s.value}</span>
+                  <span className="text-xl font-bold text-white">
+                    {s.value}
+                  </span>
                   <span className="text-xs text-white/40">{s.label}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right — Visual Card Stack */}
           <div className="relative flex items-center justify-center lg:justify-end">
-
-            {/* Main image card */}
-            <div className="relative w-full max-w-sm">
+            <div className="relative w-full max-w-md">
               <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#222222]">
                 <Image
                   src="/mental-health-care-sketch-diagram.jpg"
@@ -114,13 +109,15 @@ export default function Hero() {
                   alt="Mental wellness"
                   className="w-full h-72 object-cover opacity-80"
                 />
-                {/* Overlay gradient on image */}
-                <div className="absolute inset-0 rounded-2xl"
-                  style={{ background: "linear-gradient(to top, #1a1a1a 0%, transparent 50%)" }}
+                <div
+                  className="absolute inset-0 rounded-2xl"
+                  style={{
+                    background:
+                      "linear-gradient(to top, #1a1a1a 0%, transparent 50%)",
+                  }}
                 />
               </div>
 
-              {/* Floating card — top left */}
               <div className="absolute -top-5 -left-10 bg-[#222222] border border-white/10 rounded-2xl p-4 flex items-center gap-3 shadow-xl">
                 <div className="w-10 h-10 rounded-xl bg-[#1D9E75]/20 flex items-center justify-center flex-shrink-0">
                   <Sparkles size={18} className="text-[#1D9E75]" />
@@ -129,11 +126,12 @@ export default function Hero() {
                   <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest">
                     Active now
                   </p>
-                  <p className="text-sm font-semibold text-white">Mindful Morning</p>
+                  <p className="text-sm font-semibold text-white">
+                    Mindful Morning
+                  </p>
                 </div>
               </div>
 
-              {/* Floating card — bottom right */}
               <div className="absolute -bottom-6 -right-8 bg-[#222222] border border-white/10 rounded-2xl p-4 flex items-center gap-3 shadow-xl">
                 <div className="w-10 h-10 rounded-xl bg-[#1D9E75]/20 flex items-center justify-center flex-shrink-0">
                   <Users size={18} className="text-[#1D9E75]" />
@@ -142,20 +140,19 @@ export default function Hero() {
                   <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest">
                     Support group
                   </p>
-                  <p className="text-sm font-semibold text-white">Anxiety Warriors</p>
+                  <p className="text-sm font-semibold text-white">
+                    Anxiety Warriors
+                  </p>
                 </div>
               </div>
-
-              {/* Online indicator card */}
               <div className="absolute -bottom-5 left-4 bg-[#222222] border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2 shadow-xl">
                 <span className="w-2 h-2 rounded-full bg-[#1D9E75] animate-pulse" />
                 <span className="text-xs text-white/60 font-medium">
-                  128 people online right now
+                  Check your Mental Health
                 </span>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
